@@ -17,3 +17,17 @@ function logSubmit(event) {
 const form = document.getElementById("infoForm");
 const mainBody = document.getElementById("mainBod");
 form.addEventListener("submit", logSubmit);
+
+
+
+//Getting users Location
+
+fetch("http://ip-api.com/json/?fields=45674495")
+	.then((response) => {
+		// parse response.body (convert to JSON), pass to next
+		return response.json();
+	})
+	// data = deserialized response body
+	.then((data) => {
+		console.log(data);
+	});
