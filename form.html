@@ -11,8 +11,10 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Fly on the wall</h1>
-        <button class="btn btn-primary" onclick="loadForm()">Next</button>
+        <form id="myForm" onsubmit="submitForm(event)">
+            <!-- Your form elements go here -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 
     <script src="main.js"></script>

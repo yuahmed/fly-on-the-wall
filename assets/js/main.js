@@ -1,60 +1,57 @@
-function logSubmit(event) {
-  event.preventDefault();
+// This is the main JavaScript file that will handle navigation and page loading.
 
-  document.getElementById("header").style.display = "none";
-  let nickname = document.getElementById("name").value.toUpperCase();
-
-  //console.log(nickname);
-
-
-  mainBody.innerHTML = `<div id="waldoExp" class="center" >
-    <h1 style="color: #EE2A24; text-align: center">
-        <strong> WHERE'S </strong> </h1>
-    <h1 style="color: #00AEEF; text-align: center">
-        <strong> ${nickname}? </strong> </h1> </div>`;
+// Function to load the form page
+function loadForm() {
+  // Use history.pushState to change the URL without reloading the page
+  history.pushState({ page: 'form' }, 'Form Page', 'form.html');
+  
+  // Load the content of the form page into the #app div
+  document.getElementById('app').innerHTML = fetchContent('form.html');
 }
 
-const form = document.getElementById("infoForm");
-const mainBody = document.getElementById("mainBod");
-form.addEventListener("submit", logSubmit);
+// Function to submit the form and load the images page
+function submitForm(event) {
+  event.preventDefault();
+  // Process your form data here
+  
+  // Use history.pushState to change the URL without reloading the page
+  history.pushState({ page: 'images' }, 'Images Page', 'images.html');
+  
+  // Load the content of the images page into the #app div
+  document.getElementById('app').innerHTML = fetchContent('images.html');
+}
 
+// Function to show the images
+function showImages() {
+  // Your logic to display images goes here
+  
+  // Use history.pushState to change the URL without reloading the page
+  history.pushState({ page: 'about' }, 'About Page', 'about.html');
+  
+  // Load the content of the about page into the #app div
+  document.getElementById('app').innerHTML = fetchContent('about.html');
+}
 
+// Function to fetch the content of a page using AJAX or Fetch API
+function fetchContent(page) {
+  // Your logic to fetch content goes here
+  // You can use AJAX or Fetch API to get the content of the specified page
+  // For simplicity, you can use a synchronous XMLHttpRequest
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', page, false);
+  xhr.send(null);
+  return xhr.responseText;
+}
 
-// Variables to store user information
-let ipAddress, country, region, city, timezone, currency, organisationName;
+// Event listener for the browser back button
+window.onpopstate = function(event) {
+  if (event.state) {
+      // Load the content of the previous page when the back button is pressed
+      document.getElementById('app').innerHTML = fetchContent(event.state.page + '.html');
+  }
+};
 
-// Getting user's location
-fetch("http://ip-api.com/json/?fields=45674495")
-  .then((response) => {
-    // Check if the request was successful (status code 200)
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    // Parse response.body (convert to JSON), pass to next
-    return response.json();
-  })
-  // data = deserialized response body
-  .then((data) => {
-    // Store values in variables
-    ipAddress = data.query;
-    country = data.country;
-    region = data.regionName;
-    city = data.city;
-    timezone = data.timezone;
-    currency = data.currency;
-    organisationName = data.org;
-
-    console.log("IP Address:", ipAddress);
-    console.log("Country:", country);
-    console.log("Region:", region);
-    console.log("City:", city);
-    console.log("Timezone:", timezone);
-    console.log("Currency:", currency);
-    console.log("Organisation:", organisationName);
-
-  })
-  .catch((error) => {
-      console.error("Error fetching IP information:", error);
-  });
-
+// Initial setup: Load the initial content when the page is first loaded
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('app').innerHTML = fetchContent('index.html');
+});
