@@ -1,74 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fly on the Wall</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 
-    <title>Fly on The Wall</title>
-
-    <!-- BOOTSTRAP  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-
-    <!-- FONT: where's waldo  -->
-    <link href="https://fonts.cdnfonts.com/css/optima" rel="stylesheet">
-
-    <!-- CSS  -->
-    <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-
-<body id="bg">
-    <div class="container">
-        <div class="row" id="header">
-            <!-- DO I NEED A col-12 class ?????????????????????????????????????????? -->
-            <h2> Tell us about yourself! </h2>
-        </div>
-
-        <!-- FORM  -->
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4" id="mainBod">
-                <form action=# id="infoForm" class="rounded" style="text-align: center">
-
-                    <div class="form-group">
-                        <label for="name">Nickname:</label><br>
-                        <input type="text" id="name" name="name" class="btn btn-light" placeholder="Bob" required><br>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fcolor">What is your favorite color?</label><br>
-                        <input type="text" id="fcolor" name="fcolor" class="btn btn-light" placeholder="cyan"><br>
-
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pizza">What is your pizza order?</label><br>
-                        <input type="text" id="pizza" name="pizza" class="btn btn-light"
-                            placeholder="cheese with pepperoni">
-                    </div>
-
-                    <input type="submit" value="Submit" class="btn btn-success submit">
-                </form>
-            </div>
-            <div class="col-4"></div>
-        </div>
-
-        <!-- IDENTITY LOGO -->
-        <div class="row">
-            <div class="identity d-flex flex-column align-items-center">
-                <img src="assets\img\identitytemp.svg">
-
-                <!--img needs TRANSPARENT background-->
-                <!-- also needs editing to have proper capitalization-->
-                <!--reconsider centering of image-->
-            </div>
-        </div>
-
+<body>
+    <div class="container mt-5" id="app">
+        <h1 class="mb-4">Fly on the wall</h1>
+        <button class="btn btn-primary" onclick="loadForm">Next</button>
     </div>
 
-    <!-- load javascript after the page elements render -->
-    <script src="assets/js/main.js"></script>
+    <script src="main.js"></script>
 </body>
-
 </html>
