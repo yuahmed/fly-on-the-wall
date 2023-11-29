@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,21 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
-<body>
+
+<body id="background">
+<!-- TO DOs:
+    1. complete INTRO view content
+    2. complete LOADING view content
+    3. complete ABOUT view content
+    4. complete IMAGES view content 
+    
+    5. fix logo image (transparency, capitalization) -->
+
 
     <!-- intro view -->
     <div class="container mt-5 view" id="intro">
         <h1 class="mb-4">Fly on the wall</h1>
-        <button class="btn btn-primary loadLink">Next</button>
+        <button class="btn btn-primary formLink">Next</button>
     </div>
 
     <!-- loading view -->
@@ -25,27 +35,77 @@
 
     <!-- form view -->
     <div class="container mt-5 view" id="form">
-        <form id="myForm" onsubmit="submitForm(event)">
-            <!--Form elements go here -->
-            <button type="submit" class="btn btn-primary imagesLink">Submit</button>
-        </form>
+        <div class="row">
+            <div class="identity d-flex flex-column align-items-center" id="logo">
+                <img src="assets\img\identitytemp.svg">
+
+                <!--img needs TRANSPARENT background-->
+                <!-- also needs editing to have PROPER CAPITALIZATION-->
+            </div>
+
+            <div class="row text-center" id="header">
+                <h2> Tell us about yourself! </h2>
+            </div>
+
+            <!-- FORM  -->
+            <div class="row">
+                <div class="col-4"></div>
+
+                <div class="col-4">
+                    <form id="myForm" class="py-3" onsubmit="submitForm(event)" style="text-align: center">
+                    
+                        <div> <!-- class="form-group" -->
+                            <label for="name">Nickname:</label><br>
+                            <input type="text" id="name" name="name" class="btn btn-light" placeholder="Bob"
+                                required><br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pizza">What is your pizza order?</label><br>
+                            <input type="text" id="pizza" name="pizza" class="btn btn-light"
+                                placeholder="cheese with pepperoni">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hero">Who is your favorite superhero?</label><br>
+                            <input type="text" id="hero" name="hero" class="btn btn-light" placeholder="batman">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fcolor">What is your favorite color?</label><br>
+                            <input type="color" id="fcolor" name="fcolor" class="btn btn-light"><br>
+                        </div>
+
+                        <input type="submit" value="Submit" class="btn btn-success form-group loadLink" disabled>
+                        <!-- ENABLE button in js when all fields have input -->
+                    </form>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
     </div>
 
-    
+
     <!-- images view -->
     <div class="container mt-5 view" id="images">
         <button class="btn btn-primary imagesLink">Show Images</button>
         <!-- Images will be dynamically added here -->
+
+        <!-- should have aboutLink (leads to about page)-->
+        <!-- should have homeLink (leads to intro view) -->
     </div>
 
 
     <!-- about view -->
     <div class="container mt-5 view" id="about">
         <!-- About content goes here -->
+
+        <!-- should have homeLink (leads to intro view) -->
     </div>
 
-    
+
 
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>
