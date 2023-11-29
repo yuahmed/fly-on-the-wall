@@ -6,7 +6,6 @@ async function loadForm() {
   // Load the content of the form page into the #app div
   document.getElementById('app').innerHTML = await fetchContent('form.html');
 
-  
 }
 
 // Function to submit the form and load the images page

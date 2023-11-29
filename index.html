@@ -10,10 +10,44 @@
 
 </head>
 <body>
-    <div class="container mt-5" id="app">
+
+    <!-- intro view -->
+    <div class="container mt-5 view" id="intro">
         <h1 class="mb-4">Fly on the wall</h1>
         <button class="btn btn-primary" onclick="loadForm">Next</button>
     </div>
+
+
+    <!-- form view -->
+    <div class="container mt-5 view" id="form">
+        <form id="myForm" onsubmit="submitForm(event)">
+            <!--Form elements go here -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    
+    <!-- images view -->
+    <div class="container mt-5 view" id="images">
+        <button class="btn btn-primary" onclick="showImages()">Show Images</button>
+        <!-- Images will be dynamically added here -->
+    </div>
+
+
+    <!-- about view -->
+    <div class="container mt-5 view" id="about">
+        <!-- About content goes here -->
+    </div>
+
+
+
+
+
+
+
+
+
+
 
     <script src="main.js"></script>
 </body>
