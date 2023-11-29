@@ -1,52 +1,122 @@
-// Function to load the form page
-async function loadForm() {
-  // Use history.pushState to change the URL without reloading the page
-  history.pushState({ page: 'form' }, 'Form Page', 'form.html');
-  
-  // Load the content of the form page into the #app div
-  document.getElementById('app').innerHTML = await fetchContent('form.html');
 
+let views ={
+  intro: document.querySelector("#intro"),
+  form: document.querySelector("#form"),
+  load: document.querySelector("#load"),
+  images: document.querySelector("#images"),
+  about: document.querySelector("#about")
 }
 
-// Function to submit the form and load the images page
-function submitForm(event) {
-  event.preventDefault();
-  // Process form data here
-  
-  // Use history.pushState to change the URL without reloading the page
-  history.pushState({ page: 'images' }, 'Images Page', 'images.html');
-  
-  // Load the content of the images page into the #app div
-  document.getElementById('app').innerHTML = fetchContent('images.html');
+// on page load, if there is a hash in the url...
+if (window.location.hash) {
+	// show that page
+	displayView(window.location.hash);
+} else {
+	// or show intro page by default
+	displayView("intro");
 }
 
 
-// Function to show the images
-function showImages() {
-  // logic to display images goes here
+
+//display the view
+function displayView(view){
   
-  // Use history.pushState to change the URL without reloading the page
-  history.pushState({ page: 'about' }, 'About Page', 'about.html');
-  
-  // Load the content of the about page into the #app div
-  document.getElementById('app').innerHTML = fetchContent('about.html');
-}
+  // remove hash symbol (if found)
+	view = view.replace("#", "");
+	console.log(`${view}`);
 
-async function fetchContent(url) {
-	const response = await fetch(url);
-	return await response.text();
-}
+  // hide all others
+	for (var key in views) {
+		if (views.hasOwnProperty(key)) {
+			views[key].style.display = "none";
+		}
+	}
+	// show the selected item
+	views[view].style.display = "block";
+	// update the page hash to reflect new page
+	window.location.hash = `${view}`;
 
-
-// Event listener for the browser back button
-window.onpopstate = function(event) {
-  if (event.state) {
-      // Load the content of the previous page when the back button is pressed
-      document.getElementById('app').innerHTML = fetchContent(event.state.page + '.html');
+  //special case 
+  if (view === "load"){
+    //set time out
+    setTimeout(function(){
+      displayView("images")
+    }, 3000)
   }
-};
+}
 
-// Initial setup: Load the initial content when the page is first loaded
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('app').innerHTML = fetchContent('index.html');
+// add listener to entire page
+document.body.addEventListener("click", function (e) {
+	// console.log(e.target.classList);
+	// then determine the view to display by the target clicked
+	if (e.target.classList.contains("introLink")) {
+		displayView("intro");
+	} else if (e.target.classList.contains("formLink")) {
+		displayView("form");
+  }else if (e.target.classList.contains("loadLink")) {
+    displayView("load");
+	} else if (e.target.classList.contains("imagesLink")) {
+		displayView("images");
+	} else if (e.target.classList.contains("aboutLink")) {
+		displayView("about");
+	}
 });
+
+
+
+
+
+
+
+// // Function to load the form page
+// async function loadForm() {
+//   // Use history.pushState to change the URL without reloading the page
+//   history.pushState({ page: 'form' }, 'Form Page', 'form.html');
+  
+//   // Load the content of the form page into the #app div
+//   document.getElementById('app').innerHTML = await fetchContent('form.html');
+
+// }
+
+// // Function to submit the form and load the images page
+// function submitForm(event) {
+//   event.preventDefault();
+//   // Process form data here
+  
+//   // Use history.pushState to change the URL without reloading the page
+//   history.pushState({ page: 'images' }, 'Images Page', 'images.html');
+  
+//   // Load the content of the images page into the #app div
+//   document.getElementById('app').innerHTML = fetchContent('images.html');
+// }
+
+
+// // Function to show the images
+// function showImages() {
+//   // logic to display images goes here
+  
+//   // Use history.pushState to change the URL without reloading the page
+//   history.pushState({ page: 'about' }, 'About Page', 'about.html');
+  
+//   // Load the content of the about page into the #app div
+//   document.getElementById('app').innerHTML = fetchContent('about.html');
+// }
+
+// async function fetchContent(url) {
+// 	const response = await fetch(url);
+// 	return await response.text();
+// }
+
+
+// // Event listener for the browser back button
+// window.onpopstate = function(event) {
+//   if (event.state) {
+//       // Load the content of the previous page when the back button is pressed
+//       document.getElementById('app').innerHTML = fetchContent(event.state.page + '.html');
+//   }
+// };
+
+// // Initial setup: Load the initial content when the page is first loaded
+// document.addEventListener('DOMContentLoaded', function() {
+//   document.getElementById('app').innerHTML = fetchContent('index.html');
+// });

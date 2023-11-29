@@ -6,7 +6,7 @@
     <title>Fly on the Wall</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
 <body>
@@ -14,7 +14,12 @@
     <!-- intro view -->
     <div class="container mt-5 view" id="intro">
         <h1 class="mb-4">Fly on the wall</h1>
-        <button class="btn btn-primary" onclick="loadForm">Next</button>
+        <button class="btn btn-primary loadLink">Next</button>
+    </div>
+
+    <!-- loading view -->
+    <div class="container mt-5 view" id="load">
+        <!-- loading content goes here -->
     </div>
 
 
@@ -22,14 +27,14 @@
     <div class="container mt-5 view" id="form">
         <form id="myForm" onsubmit="submitForm(event)">
             <!--Form elements go here -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary imagesLink">Submit</button>
         </form>
     </div>
 
     
     <!-- images view -->
     <div class="container mt-5 view" id="images">
-        <button class="btn btn-primary" onclick="showImages()">Show Images</button>
+        <button class="btn btn-primary imagesLink">Show Images</button>
         <!-- Images will be dynamically added here -->
     </div>
 
@@ -39,16 +44,8 @@
         <!-- About content goes here -->
     </div>
 
+    
 
-
-
-
-
-
-
-
-
-
-    <script src="main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
