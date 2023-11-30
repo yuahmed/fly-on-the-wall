@@ -1,3 +1,32 @@
-.view{
-    display: none;
+/* general styling (applicable to all pages) goes here: */
+.view {
+  display: none;
 }
+
+#background{
+    background-color: #FFF8F0;
+}
+#logo{
+    margin-top: 2rem;
+}
+
+/* Intro styling: */
+
+/* Form styling:  */
+#header {
+  margin-top: 2rem;
+}
+
+#myForm {
+  margin-top: 4rem;
+  background-color: #87cbc1;
+  border-radius: 3rem;
+}
+
+.form-group {
+  margin-top: 1rem;
+}   
+
+/* Loading page styling: */
+/* Results/ images styling: */
+/* About page styling: */
