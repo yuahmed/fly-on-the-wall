@@ -7,7 +7,8 @@
 
 //TO DOs:
 // 1. implement historyState for functionality to go to the previous page
-// 2. functionality to ENABLE form submit button once input fields are full
+
+// handling view transitions
 
 let views = {
   intro: document.querySelector("#intro"),
@@ -72,6 +73,22 @@ document.body.addEventListener("click", function (e) {
     displayView("about");
   }
 });
+
+// handling form values + submission
+let btn = document.querySelector("#submit");
+let nickname = document.querySelector("#name");
+let color = document.querySelector("#fcolor");
+
+color.addEventListener("change", buttonStyle);
+
+// enable button once i have color + nickname values
+function buttonStyle() {
+  if (nickname.value === "" || color.value === "") {
+    btn.disabled = true;
+  } else {
+    btn.disabled = false;
+  }
+}
 
 // // Function to load the form page
 // async function loadForm() {
