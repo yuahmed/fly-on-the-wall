@@ -90,6 +90,21 @@ function buttonStyle() {
   }
 }
 
+//changing text on intro page:
+let story = document.getElementById("storyline");
+let contBtn = document.querySelector(".formLink");
+
+//timeout to change the text after 5 seconds
+setTimeout(function() {
+  story.innerText = "Now that you're here, the Fly is wondering whether your data is in this mess! To find out, it needs your help.";
+
+  // another timeout to change the text again after an additional 5 seconds
+  setTimeout(function() {
+    story.innerText = "Can you answer some of it's questions? If yes, press continue to help the Fly solve this puzzle!";
+    contBtn.style.display = "block";
+  }, 5000);
+}, 5000);
+
 // // Function to load the form page
 // async function loadForm() {
 //   // Use history.pushState to change the URL without reloading the page
