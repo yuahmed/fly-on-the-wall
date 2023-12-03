@@ -11,6 +11,15 @@
 }
 
 /* Intro styling: */
+#storyline{
+  margin-top: 15rem;
+  font-size: x-large;
+}
+
+.formLink{
+  display: none;
+  margin-top: 5rem;
+}
 
 /* Form styling:  */
 #header {
