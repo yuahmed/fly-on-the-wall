@@ -155,3 +155,27 @@ setTimeout(function() {
 // document.addEventListener('DOMContentLoaded', function() {
 //   document.getElementById('app').innerHTML = fetchContent('index.html');
 // });
+
+
+
+//Get users location
+
+
+
+
+
+async function query(data) {
+	const response = await fetch(
+		"https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5",
+		{
+			headers: { Authorization: "Bearer {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}" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.blob();
+	return result;
+}
+query({"inputs": "Astronaut riding a horse"}).then((response) => {
+	// Use image
+});
