@@ -50,6 +50,22 @@
     <!-- loading view -->
     <div class="container view" id="load">
         <!-- loading content goes here -->
+        <div class="row d-flex flex-column align-items-center">
+            <!-- moving fly goes here -->
+            <img id="fly" src="assets\img\onlyfly.png" alt="Fly">
+            <!--  needs proper transparency, is white around the edges-->
+        </div>
+
+        <div class="row">
+            <!-- changing text goes here  -->
+            <p id="loadText" class="mb-4">thinking...</p>
+
+        </div>
+
+        <div class="row d-flex flex-column align-items-center">
+            <!-- loading bar goes here  -->
+        </div>
+
     </div>
 
 
@@ -109,17 +125,95 @@
 
 
     <!-- images view -->
-    <div class="container view" id="images">
-        <button class="btn btn-primary imagesLink">Show Images</button>
+    <div class="container-fluid view" id="images">
         <!-- Images will be dynamically added here -->
 
         <!-- should have aboutLink (leads to about page)-->
         <!-- should have homeLink (leads to intro view) -->
+
+        <div class="row" id="navbar">
+            <!-- navbar with Home - logo - About  -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active" style="margin-left: 7rem;">
+                            <a class="nav-link" href="#intro">Home <span class="sr-only"></span></a>
+                        </li>
+
+                        <li class="nav-item active" style="margin-left: 85rem;">
+                            <a class="nav-link" href="#about">About <span class="sr-only"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- </div> -->
+
+
+        <div class="row" style="margin-top: 3rem;">
+            <div class="col-4" id="locStat">
+                <!-- top left image -->
+                <h3>You are in <span id="location"></span></h3>
+                <div class="tempRect"></div>
+            </div>
+
+            <div class="col-4">
+                <!-- nothing goes here -->
+            </div>
+
+            <div class="col-4" id="deviceStat">
+                <!-- top right image -->
+                <h3>You are using <span id="device"></span> device.</h3>
+                <div class="tempRect"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!--wheres user button -->
+            <div class="col-12 d-flex flex-column align-items-center">
+                <button class="btn btn-info imagesLink" onclick="imgDisplay()">
+                    <div id="whereBtn">
+                        <!-- added in JS -->
+                    </div>
+                </button>
+                <!-- how do you know button  -->
+                <button class="btn btn-dark" id="howBtn">How do you know this?</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- will hae bottom two images -->
+
+            <div class="col-4" id="currStat">
+                <!-- bottom left image -->
+                <h3>The currency you use is <span id="currency"></span></h3>
+                <div class="tempRect"></div>
+            </div>
+
+            <div class="col-4">
+                <!-- nothing goes here -->
+            </div>
+
+            <div class="col-4" id="batteryStat">
+                <!-- bottom right image -->
+                <h3>
+                    Currently, your device is<span id="charge"></span> The battery level is <span id="level"></span>
+                </h3>
+                <div class="tempRect"></div>
+            </div>
+        </div>
     </div>
 
 
     <!-- about view -->
-    <div class="container view" id="about">
+    <div class="container-fluid view" id="about">
         <!-- About content goes here -->
 
         <!-- should have homeLink (leads to intro view) -->
@@ -141,8 +235,8 @@
             <!-- how did you know info-->
             <h2>
                 How did the Fly <span style="color: #91240C;">know your info</span>?
-              </h2>
-            
+            </h2>
+
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Et molestie ac feugiat sed lectus vestibulum. Vulputate sapien nec sagittis aliquam
                 malesuada bibendum.<br>
@@ -154,17 +248,16 @@
         </div>
 
         <div class=" row">
-                        <!-- authors + class info -->
-                        <h2>Who made Fly on the Wall?</h2>
-                        <p>This project was made by Jeremy Kemp '25 and Yumna Ahmed '25 from Davidson College, under the guidance of Prof. Owen Mundy. 
-                            It was made as part of the DIG-245 Critical Web Design class offered Fall 2023.</p>
+            <!-- authors + class info -->
+            <h2>Who made Fly on the Wall?</h2>
+            <p>This project was made by Jeremy Kemp '25 and Yumna Ahmed '25 from Davidson College, under the guidance of
+                Prof. Owen Mundy.
+                It was made as part of the DIG-245 Critical Web Design class offered Fall 2023.</p>
 
-                    </div>
         </div>
+    </div>
 
-
-
-        <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
