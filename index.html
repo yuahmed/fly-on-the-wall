@@ -30,7 +30,7 @@
     <div class="container view" id="intro">
         <div class="row">
             <div class="identity d-flex flex-column align-items-center" id="logo">
-                <img src="assets\img\identitytemp.svg">
+                <img src="assets\img\identity.png" width="240" height="80">
 
                 <!--img needs TRANSPARENT background-->
                 <!-- also needs editing to have PROPER CAPITALIZATION-->
@@ -45,6 +45,7 @@
                 <button class="btn btn-info formLink">Continue</button>
             </div>
         </div>
+        <div class="row"></div>
     </div>
 
     <!-- loading view -->
@@ -63,7 +64,7 @@
         </div>
 
         <div class="row d-flex flex-column align-items-center">
-            <!-- loading bar goes here  -->
+            <span class="loader"></span>
         </div>
 
     </div>
@@ -73,7 +74,7 @@
     <div class="container view" id="form">
         <div class="row">
             <div class="identity d-flex flex-column align-items-center" id="logo">
-                <img src="assets\img\identitytemp.svg">
+                <img src="assets\img\identity.png" width="240" height="80">
 
                 <!--img needs TRANSPARENT background-->
                 <!-- also needs editing to have PROPER CAPITALIZATION-->
@@ -88,7 +89,7 @@
                 <div class="col-4"></div>
 
                 <div class="col-4">
-                    <form id="myForm" class="py-3" onsubmit="submitForm(event)" style="text-align: center">
+                    <form id="myForm" class="py-3" style="text-align: center">
 
                         <div> <!-- class="form-group" -->
                             <label for="name">Nickname:</label><br>
@@ -144,11 +145,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active" style="margin-left: 7rem;">
-                            <a class="nav-link" href="#intro">Home <span class="sr-only"></span></a>
+                            <a class="nav-link introLink" href="#intro">Home <span class="sr-only"></span></a>
                         </li>
 
-                        <li class="nav-item active" style="margin-left: 85rem;">
-                            <a class="nav-link" href="#about">About <span class="sr-only"></span></a>
+                        <li class="nav-item active" style="margin-left: 67rem;">
+                            <a class="nav-link aboutLink" href="#about">About <span class="sr-only"></span></a>
                         </li>
                     </ul>
                 </div>
@@ -158,20 +159,24 @@
 
 
         <div class="row" style="margin-top: 3rem;">
-            <div class="col-4" id="locStat">
+            <div class="col-4">
+                <div class="d-none" id="locStat">
                 <!-- top left image -->
                 <h3>You are in <span id="location"></span></h3>
-                <div class="tempRect"></div>
+                <div id="locImg" class="align-items-center"></div>
+            </div>
             </div>
 
             <div class="col-4">
                 <!-- nothing goes here -->
             </div>
 
-            <div class="col-4" id="deviceStat">
+            <div class="col-4">
+                <div class="d-none"  id="deviceStat">
                 <!-- top right image -->
                 <h3>You are using <span id="device"></span> device.</h3>
-                <div class="tempRect"></div>
+                <div id="devImg"></div>
+                </div>
             </div>
         </div>
 
@@ -184,29 +189,38 @@
                     </div>
                 </button>
                 <!-- how do you know button  -->
-                <button class="btn btn-dark" id="howBtn">How do you know this?</button>
+                <div class="d-none" id="howBtn">
+                    <a class="aboutLink" href="#about">
+                        <button class="btn btn-dark aboutLink">
+                            
+                            How do you know this?
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="row">
-            <!-- will hae bottom two images -->
+            <!-- will have bottom two images -->
 
-            <div class="col-4" id="currStat">
+            <div class="col-4">
+                <div class="d-none"  id="currStat">
                 <!-- bottom left image -->
-                <h3>The currency you use is <span id="currency"></span></h3>
-                <div class="tempRect"></div>
+                <h3>The currency you are using is <span id="currency"></span></h3>
+                <div id="currImg"></div>
+                </div>
             </div>
 
             <div class="col-4">
                 <!-- nothing goes here -->
             </div>
-
-            <div class="col-4" id="batteryStat">
+            
+            <div class="col-4">
+                <div class="d-none"  id="batteryStat">
                 <!-- bottom right image -->
-                <h3>
-                    Currently, your device is<span id="charge"></span> The battery level is <span id="level"></span>
-                </h3>
-                <div class="tempRect"></div>
+                <h3>Currently, your device is <span id="charge"></span> The battery level is <span id="level"></span>.</h3>
+                <div id="battImg"></div>
+                </div>
             </div>
         </div>
     </div>
