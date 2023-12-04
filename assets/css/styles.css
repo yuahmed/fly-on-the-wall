@@ -37,5 +37,34 @@
 }   
 
 /* Loading page styling: */
+#fly {
+  /* position: absolute; */
+  width: 120px; /* Adjust the width as needed */
+  height: auto;
+  transition: transform 2s linear;
+  margin-top: 10rem;
+}
+
+#loadText{
+  margin-top: 12rem;
+  text-align: center;
+  font-size: larger;
+}
+
 /* Results/ images styling: */
+
+.tempRect { /*to remove*/
+  width: 200px;
+  height: 200px;
+  background-color: #f7f7f7;
+  margin-bottom: 3rem;
+}
+
+h3{
+  text-align: center;
+}
+
+#batteryStat, #locStat, #currStat, #deviceStat,#howBtn {
+  display: none;
+}
 /* About page styling: */
