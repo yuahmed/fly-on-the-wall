@@ -1,51 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fly on the Wall</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Font -->
+    <link href="https://fonts.cdnfonts.com/css/dm-sans?styles=50586" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link href="assets/css/styles.css" rel="stylesheet">
 
 </head>
-<body>
+
+<body id="background" style="font-family: DM Sans, sans-serif;">
+    <!-- TO DOs:
+    1. complete INTRO view content
+    2. complete LOADING view content
+    3. complete ABOUT view content
+    4. complete IMAGES view content 
+    
+    5. fix logo image (transparency, capitalization) -->
+
 
     <!-- intro view -->
-    <div class="container mt-5 view" id="intro">
-        <h1 class="mb-4">Fly on the wall</h1>
-        <button class="btn btn-primary loadLink">Next</button>
+    <div class="container view" id="intro">
+        <div class="row">
+            <div class="identity d-flex flex-column align-items-center" id="logo">
+                <img src="assets\img\identitytemp.svg">
+
+                <!--img needs TRANSPARENT background-->
+                <!-- also needs editing to have PROPER CAPITALIZATION-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 d-flex flex-column align-items-center">
+                <p id="storyline" class="mb-4">The Fly is exploring the deep dark internet.
+                    It has found a digital labyrinth containing all sorts of data. </p>
+
+                <button class="btn btn-info formLink">Continue</button>
+            </div>
+        </div>
     </div>
 
     <!-- loading view -->
-    <div class="container mt-5 view" id="load">
+    <div class="container view" id="load">
         <!-- loading content goes here -->
+        <div class="row d-flex flex-column align-items-center">
+            <!-- moving fly goes here -->
+            <img id="fly" src="assets\img\onlyfly.png" alt="Fly">
+            <!--  needs proper transparency, is white around the edges-->
+        </div>
+
+        <div class="row">
+            <!-- changing text goes here  -->
+            <p id="loadText" class="mb-4">thinking...</p>
+
+        </div>
+
+        <div class="row d-flex flex-column align-items-center">
+            <!-- loading bar goes here  -->
+        </div>
+
     </div>
 
 
     <!-- form view -->
-    <div class="container mt-5 view" id="form">
-        <form id="myForm" onsubmit="submitForm(event)">
-            <!--Form elements go here -->
-            <button type="submit" class="btn btn-primary imagesLink">Submit</button>
-        </form>
+    <div class="container view" id="form">
+        <div class="row">
+            <div class="identity d-flex flex-column align-items-center" id="logo">
+                <img src="assets\img\identitytemp.svg">
+
+                <!--img needs TRANSPARENT background-->
+                <!-- also needs editing to have PROPER CAPITALIZATION-->
+            </div>
+
+            <div class="row text-center" id="header">
+                <h2> Tell us about yourself! </h2>
+            </div>
+
+            <!-- FORM  -->
+            <div class="row">
+                <div class="col-4"></div>
+
+                <div class="col-4">
+                    <form id="myForm" class="py-3" onsubmit="submitForm(event)" style="text-align: center">
+
+                        <div> <!-- class="form-group" -->
+                            <label for="name">Nickname:</label><br>
+                            <input type="text" id="name" name="name" class="btn btn-light" placeholder="Bob"
+                                required><br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pizza">What is your pizza order?</label><br>
+                            <input type="text" id="pizza" name="pizza" class="btn btn-light"
+                                placeholder="cheese with pepperoni">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hero">Who is your favorite superhero?</label><br>
+                            <input type="text" id="hero" name="hero" class="btn btn-light" placeholder="batman">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fcolor">What is your favorite color?</label><br>
+                            <input type="color" id="fcolor" name="fcolor" class="btn btn-light"><br>
+                        </div>
+
+                        <!-- submit button  -->
+                        <input type="submit" value="Submit" id="submit" class="btn btn-success form-group loadLink"
+                            disabled>
+
+                    </form>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
     </div>
 
-    
+
     <!-- images view -->
-    <div class="container mt-5 view" id="images">
-        <button class="btn btn-primary imagesLink">Show Images</button>
+    <div class="container-fluid view" id="images">
         <!-- Images will be dynamically added here -->
+
+        <!-- should have aboutLink (leads to about page)-->
+        <!-- should have homeLink (leads to intro view) -->
+
+        <div class="row" id="navbar">
+            <!-- navbar with Home - logo - About  -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active" style="margin-left: 7rem;">
+                            <a class="nav-link" href="#intro">Home <span class="sr-only"></span></a>
+                        </li>
+
+                        <li class="nav-item active" style="margin-left: 85rem;">
+                            <a class="nav-link" href="#about">About <span class="sr-only"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- </div> -->
+
+
+        <div class="row" style="margin-top: 3rem;">
+            <div class="col-4" id="locStat">
+                <!-- top left image -->
+                <h3>You are in <span id="location"></span></h3>
+                <div class="tempRect"></div>
+            </div>
+
+            <div class="col-4">
+                <!-- nothing goes here -->
+            </div>
+
+            <div class="col-4" id="deviceStat">
+                <!-- top right image -->
+                <h3>You are using <span id="device"></span> device.</h3>
+                <div class="tempRect"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!--wheres user button -->
+            <div class="col-12 d-flex flex-column align-items-center">
+                <button class="btn btn-info imagesLink" onclick="imgDisplay()">
+                    <div id="whereBtn">
+                        <!-- added in JS -->
+                    </div>
+                </button>
+                <!-- how do you know button  -->
+                <button class="btn btn-dark" id="howBtn">How do you know this?</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- will hae bottom two images -->
+
+            <div class="col-4" id="currStat">
+                <!-- bottom left image -->
+                <h3>The currency you use is <span id="currency"></span></h3>
+                <div class="tempRect"></div>
+            </div>
+
+            <div class="col-4">
+                <!-- nothing goes here -->
+            </div>
+
+            <div class="col-4" id="batteryStat">
+                <!-- bottom right image -->
+                <h3>
+                    Currently, your device is<span id="charge"></span> The battery level is <span id="level"></span>
+                </h3>
+                <div class="tempRect"></div>
+            </div>
+        </div>
     </div>
 
 
     <!-- about view -->
-    <div class="container mt-5 view" id="about">
+    <div class="container-fluid view" id="about">
         <!-- About content goes here -->
-    </div>
 
-    
+        <!-- should have homeLink (leads to intro view) -->
+
+        <div class="row mt-5">
+            <!-- what is FOTW -->
+            <h2> What is Fly on the Wall?</h2>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Et molestie ac feugiat sed lectus vestibulum. Vulputate sapien nec sagittis aliquam
+                malesuada bibendum. <br>
+
+                Gravida rutrum quisque non tellus orci ac auctor augue. At imperdiet dui accumsan sit amet. Dignissim
+                diam quis enim lobortis scelerisque fermentum dui. Pretium quam vulputate dignissim suspendisse.
+                Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Amet nisl suscipit adipiscing
+                bibendum est ultricies integer quis auctor. Id cursus metus aliquam eleifend mi in nulla.</p>
+        </div>
+
+        <div class="row">
+            <!-- how did you know info-->
+            <h2>
+                How did the Fly <span style="color: #91240C;">know your info</span>?
+            </h2>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Et molestie ac feugiat sed lectus vestibulum. Vulputate sapien nec sagittis aliquam
+                malesuada bibendum.<br>
+
+                Gravida rutrum quisque non tellus orci ac auctor augue. At imperdiet dui accumsan sit amet. Dignissim
+                diam quis enim lobortis scelerisque fermentum dui. Pretium quam vulputate dignissim suspendisse.
+                Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Amet nisl suscipit adipiscing
+                bibendum est ultricies integer quis auctor. Id cursus metus aliquam eleifend mi in nulla.</p>
+        </div>
+
+        <div class=" row">
+            <!-- authors + class info -->
+            <h2>Who made Fly on the Wall?</h2>
+            <p>This project was made by Jeremy Kemp '25 and Yumna Ahmed '25 from Davidson College, under the guidance of
+                Prof. Owen Mundy.
+                It was made as part of the DIG-245 Critical Web Design class offered Fall 2023.</p>
+
+        </div>
+    </div>
 
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>

@@ -1,3 +1,70 @@
-.view{
-    display: none;
+/* general styling (applicable to all pages) goes here: */
+.view {
+  display: none;
 }
+
+#background{
+    background-color: #FFF8F0;
+}
+#logo{
+    margin-top: 2rem;
+}
+
+/* Intro styling: */
+#storyline{
+  margin-top: 15rem;
+  font-size: x-large;
+}
+
+.formLink{
+  display: none;
+  margin-top: 5rem;
+}
+
+/* Form styling:  */
+#header {
+  margin-top: 2rem;
+}
+
+#myForm {
+  margin-top: 4rem;
+  background-color: #87cbc1;
+  border-radius: 3rem;
+}
+
+.form-group {
+  margin-top: 1rem;
+}   
+
+/* Loading page styling: */
+#fly {
+  /* position: absolute; */
+  width: 120px; /* Adjust the width as needed */
+  height: auto;
+  transition: transform 2s linear;
+  margin-top: 10rem;
+}
+
+#loadText{
+  margin-top: 12rem;
+  text-align: center;
+  font-size: larger;
+}
+
+/* Results/ images styling: */
+
+.tempRect { /*to remove*/
+  width: 200px;
+  height: 200px;
+  background-color: #f7f7f7;
+  margin-bottom: 3rem;
+}
+
+h3{
+  text-align: center;
+}
+
+#batteryStat, #locStat, #currStat, #deviceStat,#howBtn {
+  display: none;
+}
+/* About page styling: */
