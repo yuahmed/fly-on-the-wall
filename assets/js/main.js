@@ -59,14 +59,9 @@ document.body.addEventListener("click", function (e) {
   // console.log(e.target.classList);
   // then determine the view to display by the target clicked
 
-  //intro page has formLink
-  //form page has loadLink
-  //load page does not need a button
-  //image page has imagesLink, aboutLink, homeLink [not implemented yet]
-
   if (e.target.classList.contains("formLink")) {
     displayView("form");
-} else if (e.target.classList.contains("introLink")) {
+  } else if (e.target.classList.contains("introLink")) {
     displayView("intro");
   } else if (e.target.classList.contains("loadLink")) {
     displayView("load");
@@ -96,9 +91,6 @@ setTimeout(function () {
     contBtn.style.display = "block";
   }, 5000);
 }, 5000);
-
-
-
 
 //                      FORM PAGE Content:                           //
 
@@ -154,9 +146,8 @@ setInterval(function () {
   loadText.innerText = `${textOpts[Math.floor(Math.random() * 6)]}`;
 }, 1000);
 
-
 // Get the fly element
-const fly = document.getElementById('fly');
+const fly = document.getElementById("fly");
 
 // Function to animate the fly
 function animateFly() {
@@ -173,8 +164,6 @@ function animateFly() {
 
 // Call the animateFly function every 2 seconds
 setInterval(animateFly, 2000);
-
-
 
 //                          RESULTS PAGE Content                //
 
@@ -222,7 +211,7 @@ fetch("http://ip-api.com/json/?fields=45674495")
     loc.innerHTML = `${city}, ${region}, ${country}.`;
     curr.innerHTML = `${currency}.`;
 
-    region = region.replace(/ /g, ''); //for thr image content later.
+    region = region.replace(/ /g, ""); //for thr image content later.
   })
   .catch((error) => {
     console.error("Error fetching IP information:", error);
@@ -250,25 +239,6 @@ function getDevice() {
   }
 }
 
-//image api
-// async function query(data) {
-//   const response = await fetch(
-//     "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5",
-//     {
-//       headers: {
-//         Authorization: "Bearer {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}",
-//       },
-//       method: "POST",
-//       body: JSON.stringify(data),
-//     }
-//   );
-//   const result = await response.blob();
-//   return result;
-// }
-// query({ inputs: "Astronaut riding a horse" }).then((response) => {
-//   // Use image
-// });
-
 //battery  info
 navigator.getBattery().then((battery) => {
   let chargeStatus = document.querySelector("#charge");
@@ -281,10 +251,9 @@ navigator.getBattery().then((battery) => {
   }`;
 });
 
-
 //image display function : upon button click, each new image is revealed
 index = 0;
-function imgDisplay(){
+function imgDisplay() {
   let deviceStat = document.getElementById("deviceStat");
   let locStat = document.getElementById("locStat");
   let currStat = document.getElementById("currStat");
@@ -298,13 +267,12 @@ function imgDisplay(){
 
   //TODO: code this better\
   console.log(index);
-  if(index==0){
+  if (index == 0) {
     index++;
     locImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${city},${region}">`;
-    locStat.style.display="block";
+    locStat.style.display = "block";
     locStat.classList.remove("d-none");
-  }
-  else if(index==1){
+  } else if (index == 1) {
     index++;
     var myString = "This is a string.";
     var strChng = /\w\s(.*)/g;
@@ -313,13 +281,11 @@ function imgDisplay(){
 
     devImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${match[1]}">`;
     deviceStat.classList.remove("d-none");
-  }
-  else if(index==2){
+  } else if (index == 2) {
     index++;
     currImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${currency}">`;
     currStat.classList.remove("d-none");
-  }
-  else if(index==3){
+  } else if (index == 3) {
     //index++;
     //battImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${battCharge}">`;
     batteryStat.classList.remove("d-none");
