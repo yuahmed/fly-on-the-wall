@@ -66,6 +66,8 @@ document.body.addEventListener("click", function (e) {
 
   if (e.target.classList.contains("formLink")) {
     displayView("form");
+} else if (e.target.classList.contains("introLink")) {
+    displayView("intro");
   } else if (e.target.classList.contains("loadLink")) {
     displayView("load");
     // document.getElementById("background").style.color = color.value;
@@ -95,6 +97,9 @@ setTimeout(function () {
   }, 5000);
 }, 5000);
 
+
+
+
 //                      FORM PAGE Content:                           //
 
 //let color = document.querySelector("#fcolor");
@@ -123,9 +128,9 @@ function logSubmit(event) {
 
   //console.log(nickname);
 
-  whereBtn.innerHTML = `<h2 style = "text-align: center; font-family: 'Times New Roman', Times, serif;">
+  whereBtn.innerHTML = `<h2 style = "text-align: center;">
         WHERE'S </h2>
-    <h2 style = "text-align: center; font-family: 'Times New Roman', Times, serif;">
+    <h2 style = "text-align: center;">
         <strong> ${nickname.value}? </strong> </h2>`;
 }
 
@@ -170,88 +175,8 @@ function animateFly() {
 setInterval(animateFly, 2000);
 
 
-// // Function to load the form page
-// async function loadForm() {
-//   // Use history.pushState to change the URL without reloading the page
-//   history.pushState({ page: 'form' }, 'Form Page', 'form.html');
-
-//   // Load the content of the form page into the #app div
-//   document.getElementById('app').innerHTML = await fetchContent('form.html');
-
-// }
-
-// // Function to submit the form and load the images page
-// function submitForm(event) {
-//   event.preventDefault();
-//   // Process form data here
-
-//   // Use history.pushState to change the URL without reloading the page
-//   history.pushState({ page: 'images' }, 'Images Page', 'images.html');
-
-//   // Load the content of the images page into the #app div
-//   document.getElementById('app').innerHTML = fetchContent('images.html');
-// }
-
-// // Function to show the images
-// function showImages() {
-//   // logic to display images goes here
-
-//   // Use history.pushState to change the URL without reloading the page
-//   history.pushState({ page: 'about' }, 'About Page', 'about.html');
-
-//   // Load the content of the about page into the #app div
-//   document.getElementById('app').innerHTML = fetchContent('about.html');
-// }
-
-// async function fetchContent(url) {
-// 	const response = await fetch(url);
-// 	return await response.text();
-// }
-
-// // Event listener for the browser back button
-// window.onpopstate = function(event) {
-//   if (event.state) {
-//       // Load the content of the previous page when the back button is pressed
-//       document.getElementById('app').innerHTML = fetchContent(event.state.page + '.html');
-//   }
-// };
-
-// // Initial setup: Load the initial content when the page is first loaded
-// document.addEventListener('DOMContentLoaded', function() {
-//   document.getElementById('app').innerHTML = fetchContent('index.html');
-// });
-
 
 //                          RESULTS PAGE Content                //
-
-//image display function : upon button click, each new image is revealed
-index = 0;
-function imgDisplay(){
-  let deviceStat = document.getElementById("deviceStat");
-  let locStat = document.getElementById("locStat");
-  let currStat = document.getElementById("currStat");
-  let batteryStat = document.getElementById("batteryStat");
-  let howBtn = document.getElementById("howBtn");
-
-  //TODO: code this better
-  if(index==0){
-    index++;
-    locStat.style.display="block";
-  }
-  else if(index==1){
-    index++;
-    deviceStat.style.display="block";
-  }
-  else if(index==2){
-    index++;
-    currStat.style.display="block";
-  }
-  else if(index==3){
-    //index++;
-    batteryStat.style.display="block";
-    howBtn.style.display = "block";
-  }
-}
 
 //Get user data: location, currency
 
@@ -296,6 +221,8 @@ fetch("http://ip-api.com/json/?fields=45674495")
 
     loc.innerHTML = `${city}, ${region}, ${country}.`;
     curr.innerHTML = `${currency}.`;
+
+    region = region.replace(/ /g, ''); //for thr image content later.
   })
   .catch((error) => {
     console.error("Error fetching IP information:", error);
@@ -304,7 +231,9 @@ fetch("http://ip-api.com/json/?fields=45674495")
 //obtaining user device:
 //currently only set up for WINDOWS, APPLE, LINUX & ANDROID
 let device = document.querySelector("#device");
-device.innerHTML = `${getDevice()}`;
+devType = getDevice();
+device.innerHTML = devType;
+
 function getDevice() {
   const userAgent = window.navigator.userAgent.toLowerCase();
 
@@ -322,30 +251,78 @@ function getDevice() {
 }
 
 //image api
-async function query(data) {
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5",
-    {
-      headers: {
-        Authorization: "Bearer {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}",
-      },
-      method: "POST",
-      body: JSON.stringify(data),
-    }
-  );
-  const result = await response.blob();
-  return result;
-}
-query({ inputs: "Astronaut riding a horse" }).then((response) => {
-  // Use image
-});
+// async function query(data) {
+//   const response = await fetch(
+//     "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5",
+//     {
+//       headers: {
+//         Authorization: "Bearer {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}",
+//       },
+//       method: "POST",
+//       body: JSON.stringify(data),
+//     }
+//   );
+//   const result = await response.blob();
+//   return result;
+// }
+// query({ inputs: "Astronaut riding a horse" }).then((response) => {
+//   // Use image
+// });
 
+//battery  info
 navigator.getBattery().then((battery) => {
   let chargeStatus = document.querySelector("#charge");
   let level = document.querySelector("#level");
 
-  level.innerHTML = `${battery.level * 100}%`;
+  let battCharge = `${battery.level * 100}%`;
+  level.innerHTML = battCharge;
   chargeStatus.innerHTML = `${
     battery.charging ? " charging." : " not charging."
   }`;
 });
+
+
+//image display function : upon button click, each new image is revealed
+index = 0;
+function imgDisplay(){
+  let deviceStat = document.getElementById("deviceStat");
+  let locStat = document.getElementById("locStat");
+  let currStat = document.getElementById("currStat");
+  let batteryStat = document.getElementById("batteryStat");
+  let howBtn = document.getElementById("howBtn");
+
+  let locImg = document.getElementById("locImg");
+  let devImg = document.getElementById("devImg");
+  let currImg = document.getElementById("currImg");
+  let battImg = document.getElementById("battImg");
+
+  //TODO: code this better\
+  console.log(index);
+  if(index==0){
+    index++;
+    locImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${city},${region}">`;
+    locStat.style.display="block";
+    locStat.classList.remove("d-none");
+  }
+  else if(index==1){
+    index++;
+    var myString = "This is a string.";
+    var strChng = /\w\s(.*)/g;
+    var match = strChng.exec(devType);
+    console.log(match[1]);
+
+    devImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${match[1]}">`;
+    deviceStat.classList.remove("d-none");
+  }
+  else if(index==2){
+    index++;
+    currImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${currency}">`;
+    currStat.classList.remove("d-none");
+  }
+  else if(index==3){
+    //index++;
+    //battImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${battCharge}">`;
+    batteryStat.classList.remove("d-none");
+    howBtn.classList.remove("d-none");
+  }
+}

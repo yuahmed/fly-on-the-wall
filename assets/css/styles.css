@@ -51,20 +51,75 @@
   font-size: larger;
 }
 
-/* Results/ images styling: */
+.loader {
+    width: 0;
+    height: 4.8px;
+    /* display: inline-block; */
+    position: relative;
+    background: #000000;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    /* box-sizing: border-box; */
+    animation: animFw 5s linear infinite;
+  }
+    .loader::after,
+    .loader::before {
+      content: '';
+      width: 10px;
+      height: 2px;
+      background: #000000;
+      position: absolute;
+      top: 9px;
+      right: -2px;
+      opacity: 0;
+      transform: rotate(-45deg) translateX(0px);
+      /* box-sizing: border-box; */
+      animation: coli1 0.3s linear infinite;
+    }
+    .loader::before {
+      top: -4px;
+      transform: rotate(45deg);
+      animation: coli2 0.3s linear infinite;
+    }
+  
+  @keyframes animFw {
+      0% {
+    width: 0;
+  }
+      100% {
+    width: 100%;
+  }
+    }
+  
+  @keyframes coli1 {
+      0% {
+    transform: rotate(-45deg) translateX(0px);
+    opacity: 0.7;
+  }
+      100% {
+    transform: rotate(-45deg) translateX(-45px);
+    opacity: 0;
+  }
+    }
+  
+  @keyframes coli2 {
+      0% {
+    transform: rotate(45deg) translateX(0px);
+    opacity: 1;
+  }
+      100% {
+    transform: rotate(45deg) translateX(-45px);
+    opacity: 0.7;
+  }
+    }
+    
 
-.tempRect { /*to remove*/
-  width: 200px;
-  height: 200px;
-  background-color: #f7f7f7;
-  margin-bottom: 3rem;
-}
+/* Results/ images styling: */
 
 h3{
   text-align: center;
 }
 
-#batteryStat, #locStat, #currStat, #deviceStat,#howBtn {
-  display: none;
-}
+/* #batteryStat, #locStat, #currStat, #deviceStat,#howBtn, #locImg, #devImg, #currImg, #battImg {
+  display: none; 
+} */
 /* About page styling: */
