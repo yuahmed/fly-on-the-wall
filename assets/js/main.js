@@ -108,8 +108,8 @@ setTimeout(function () {
 
 
 
-
 //                      FORM PAGE Content:                           //
+
 
 //let color = document.querySelector("#fcolor");
 // handling form values + submission
