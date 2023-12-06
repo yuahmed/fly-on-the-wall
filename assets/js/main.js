@@ -7,6 +7,13 @@
 
 //TO DOs:
 // 1. implement historyState for functionality to go to the previous page
+
+window.addEventListener('popstate', function(event) {
+  // Handle the back button click here
+  // You might want to check the event state and navigate accordingly
+  displayView(event.state || 'intro');
+});
+
 // 2. organize this JS file
 
 let bg = document.getElementById("background");
@@ -32,27 +39,29 @@ if (window.location.hash) {
 function displayView(view) {
   // remove hash symbol (if found)
   view = view.replace("#", "");
-  console.log(`${view}`);
 
   // hide all others
   for (var key in views) {
-    if (views.hasOwnProperty(key)) {
-      views[key].style.display = "none";
-    }
+      if (views.hasOwnProperty(key)) {
+          views[key].style.display = "none";
+      }
   }
+
   // show the selected item
   views[view].style.display = "block";
-  // update the page hash to reflect new page
-  window.location.hash = `${view}`;
 
-  //special case: loading page to images
+  // update the page state to reflect the new view
+  history.pushState(view, null, `#${view}`);
+
+  // special case: loading page to images
   if (view === "load") {
-    //set time out
-    setTimeout(function () {
-      displayView("images");
-    }, 5000);
+      // set time out
+      setTimeout(function () {
+          displayView("images");
+      }, 5000);
   }
 }
+
 
 // add listener to entire page
 document.body.addEventListener("click", function (e) {

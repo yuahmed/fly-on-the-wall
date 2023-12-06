@@ -134,6 +134,7 @@
 
         <div class="row" id="navbar">
             <!-- navbar with Home - logo - About  -->
+            <!-- navbar with Home - logo - About  -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <!-- <a class="navbar-brand" href="#">Navbar</a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -148,7 +149,13 @@
                             <a class="nav-link introLink" href="#intro">Home <span class="sr-only"></span></a>
                         </li>
 
-                        <li class="nav-item active" style="margin-left: 67rem;">
+                        <!-- Add a new list item for the logo with a class "navbar-logo" -->
+                        <li class="nav-item navbar-logo" style="margin-left: 30rem;">
+                            <!-- Add your image source here -->
+                            <img src="assets\img\identitynavbar.png" alt="Logo" class="navbar-logo-img">
+                        </li>
+
+                        <li class="nav-item active" style="margin-left: 30rem;">
                             <a class="nav-link aboutLink" href="#about">About <span class="sr-only"></span></a>
                         </li>
                     </ul>
@@ -192,7 +199,6 @@
                 <div class="d-none" id="howBtn">
                     <a class="aboutLink" href="#about">
                         <button class="btn btn-dark aboutLink">
-                            
                             How do you know this?
                         </button>
                     </a>

@@ -114,6 +114,17 @@
     
 
 /* Results/ images styling: */
+.navbar-logo-img {
+  width: 130px; /* Adjust the width as needed */
+  height: auto;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
 
 h3{
   text-align: center;
