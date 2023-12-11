@@ -17,14 +17,6 @@
 </head>
 
 <body id="background" style="font-family: DM Sans, sans-serif;">
-    <!-- TO DOs:
-    1. complete INTRO view content
-    2. complete LOADING view content
-    3. complete ABOUT view content
-    4. complete IMAGES view content 
-    
-    5. fix logo image (transparency, capitalization) -->
-
 
     <!-- intro view -->
     <div class="container view" id="intro">
@@ -38,12 +30,14 @@
         </div>
 
         <div class="row">
-            <div class="col-12 d-flex flex-column align-items-center">
+            <div class="col-2 col-md-2 col-lg-3"></div>
+            <div class="col-8 col-md-8 col-lg-6 d-flex flex-column align-items-center text-center">
                 <p id="storyline" class="mb-4">The Fly is exploring the deep dark internet.
-                    It has found a digital labyrinth containing all sorts of data. </p>
+                    It has found a digital labyrinth containing all sorts of data.</p>
 
                 <button class="btn btn-info formLink">Continue</button>
             </div>
+            <div class="col-2 col-md-2 col-lg-3"></div>
         </div>
         <div class="row"></div>
     </div>
@@ -58,15 +52,21 @@
         </div>
 
         <div class="row">
-            <!-- changing text goes here  -->
-            <p id="loadText" class="mb-4">thinking...</p>
+            <div class="col-4 col-md-3 col-lg-4"></div>
+
+            <div class="col-4 col-md-6 col-lg-4">
+                <!-- changing text goes here  -->
+                <p id="loadText" class="mb-4">thinking...</p>
+            </div>
+
+            <div class="col-4 col-md-3 col-lg-4"></div>
 
         </div>
 
         <div class="row d-flex flex-column align-items-center">
             <span class="loader"></span>
-        </div>
 
+        </div>
     </div>
 
 
@@ -86,9 +86,9 @@
 
             <!-- FORM  -->
             <div class="row">
-                <div class="col-4"></div>
+                <div class="col-3 col-md-4 col-lg-4"></div>
 
-                <div class="col-4">
+                <div class="col-6 col-md-6 col-lg-4">
                     <form id="myForm" class="py-3" style="text-align: center">
 
                         <div> <!-- class="form-group" -->
@@ -119,7 +119,7 @@
 
                     </form>
                 </div>
-                <div class="col-4"></div>
+                <div class="col-3 col-md-4 col-lg-4"></div>
             </div>
         </div>
     </div>
@@ -127,10 +127,7 @@
 
     <!-- images view -->
     <div class="container-fluid view" id="images">
-        <!-- Images will be dynamically added here -->
-
-        <!-- should have aboutLink (leads to about page)-->
-        <!-- should have homeLink (leads to intro view) -->
+        <!-- Images will be dynamically (through JS) added here -->
 
         <div class="row" id="navbar">
             <!-- navbar with Home - logo - About  -->
@@ -162,34 +159,32 @@
                 </div>
             </nav>
         </div>
-        <!-- </div> -->
 
-
-        <div class="row" style="margin-top: 3rem;">
-            <div class="col-4">
+        <!-- top two images here  -->
+        <div class="row mt-3">
+            <!-- top left image -->
+            <div class="col-4 col-md-4 col-lg-4">
                 <div class="d-none" id="locStat">
-                <!-- top left image -->
-                <h3>You are in <span id="location"></span></h3>
-                <div id="locImg" class="align-items-center"></div>
-            </div>
-            </div>
-
-            <div class="col-4">
-                <!-- nothing goes here -->
+                    <h3>You are in <span id="location"></span></h3>
+                    <div id="locImg" class="align-items-center"></div>
+                </div>
             </div>
 
-            <div class="col-4">
-                <div class="d-none"  id="deviceStat">
-                <!-- top right image -->
-                <h3>You are using <span id="device"></span> device.</h3>
-                <div id="devImg"></div>
+            <div class="col-4 col-md-4 col-lg-4"></div>
+
+            <!-- top right image -->
+            <div class="col-4 col-md-4 col-lg-4">
+                <div class="d-none" id="deviceStat">
+                    <h3>You are using <span id="device"></span> device.</h3>
+                    <div id="devImg"></div>
                 </div>
             </div>
         </div>
 
+        <!--wheres user button -->
+        <!-- <div class="row where"> -->
         <div class="row">
-            <!--wheres user button -->
-            <div class="col-12 d-flex flex-column align-items-center">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
                 <button class="btn btn-info imagesLink" onclick="imgDisplay()">
                     <div id="whereBtn">
                         <!-- added in JS -->
@@ -199,6 +194,7 @@
                 <div class="d-none" id="howBtn">
                     <a class="aboutLink" href="#about">
                         <button class="btn btn-dark aboutLink">
+
                             How do you know this?
                         </button>
                     </a>
@@ -206,26 +202,24 @@
             </div>
         </div>
 
+        <!-- will have bottom two images -->
         <div class="row">
-            <!-- will have bottom two images -->
-
-            <div class="col-4">
-                <div class="d-none"  id="currStat">
-                <!-- bottom left image -->
-                <h3>The currency you are using is <span id="currency"></span></h3>
-                <div id="currImg"></div>
+            <!-- bottom left image -->
+            <div class="col-4 col-md-4 col-lg-4">
+                <div class="d-none" id="currStat">
+                    <h3>The currency you are using is <span id="currency"></span></h3>
+                    <div id="currImg"></div>
                 </div>
             </div>
 
-            <div class="col-4">
-                <!-- nothing goes here -->
-            </div>
-            
-            <div class="col-4">
-                <div class="d-none"  id="batteryStat">
-                <!-- bottom right image -->
-                <h3>Currently, your device is <span id="charge"></span> The battery level is <span id="level"></span>.</h3>
-                <div id="battImg"></div>
+            <div class="col-4 col-md-4 col-lg-4"></div>
+
+            <!-- bottom right image -->
+            <div class="col-4 col-md-4 col-lg-4">
+                <div class="d-none" id="batteryStat">
+                    <h3>Currently, your device is <span id="charge"></span> The battery level is <span
+                            id="level"></span>.</h3>
+                    <div id="battImg"></div>
                 </div>
             </div>
         </div>
@@ -238,42 +232,93 @@
 
         <!-- should have homeLink (leads to intro view) -->
 
-        <div class="row mt-5">
-            <!-- what is FOTW -->
-            <h2> What is Fly on the Wall?</h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Et molestie ac feugiat sed lectus vestibulum. Vulputate sapien nec sagittis aliquam
-                malesuada bibendum. <br>
+        <!-- what is FOTW -->
+        <div class="row mt-3">
+            <div class="col-12 col-md-12 col-lg-12">
+                <h2> What is Fly on the Wall?</h2>
+                <p>
+                    Fly on the Wall is a digital project aiming to educate users about some information that can easily
+                    be
+                    collected about them when they use the internet.
+                    While none of the information that can be collected without the user's permission may be highly
+                    sensitive
+                    or personal*, we believe the users should still be aware of what websites can learn about them. As
+                    the
+                    world becomes increasingly digital with each passing day, the need for users to be aware of how
+                    their
+                    data may be collected (and why, for that matter) becomes more apparent.
+                </p>
 
-                Gravida rutrum quisque non tellus orci ac auctor augue. At imperdiet dui accumsan sit amet. Dignissim
-                diam quis enim lobortis scelerisque fermentum dui. Pretium quam vulputate dignissim suspendisse.
-                Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Amet nisl suscipit adipiscing
-                bibendum est ultricies integer quis auctor. Id cursus metus aliquam eleifend mi in nulla.</p>
+                <p>
+                    The name is inspired from quite literally imagining what a fly sitting on the wall can learn about
+                    you.
+                    You are using your device currently; if a fly had the intellectual capabilities,
+                    it could probably tell your location, time of the day, weather, the type of device you're using,
+                    etc. by
+                    just oberving you from where it is hanging out on the wall - and you wouldn't have a clue!
+                </p>
+
+                <p>
+                    <em style="font-size: small;">*unless someone deliberately implements unethical code to collect
+                        sensitive
+                        info without the user's
+                        consent.
+                    </em>
+                </p>
+            </div>
         </div>
 
-        <div class="row">
-            <!-- how did you know info-->
-            <h2>
-                How did the Fly <span style="color: #91240C;">know your info</span>?
-            </h2>
+        <!-- how did you know info-->
+        <div class="row mt-3">
+            <div class="col-12 col-md-12 col-lg-12">
+                <h2>
+                    How did the Fly <span style="color: #91240C;">know your info</span>?
+                </h2>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Et molestie ac feugiat sed lectus vestibulum. Vulputate sapien nec sagittis aliquam
-                malesuada bibendum.<br>
+                <p>
+                    The Fly knew your info the minute you accessed this website!
+                    Such info is usually available to access through ethical coding due to one need: websites need to
+                    know such information in
+                    order to render properly and provide relevant information.
+                </p>
 
-                Gravida rutrum quisque non tellus orci ac auctor augue. At imperdiet dui accumsan sit amet. Dignissim
-                diam quis enim lobortis scelerisque fermentum dui. Pretium quam vulputate dignissim suspendisse.
-                Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Amet nisl suscipit adipiscing
-                bibendum est ultricies integer quis auctor. Id cursus metus aliquam eleifend mi in nulla.</p>
+                <p>
+                    Device information is accessible in order to adapt varying screen sizes and for compatibility with
+                    operating systems and browsers.
+                </p>
+
+                <p>
+                    The location and currency help provide relevant results when the user searches something. For
+                    example, when looking up a product, you probably want to know it's price in the currency you use,
+                    and whether
+                    it's available near you!
+                </p>
+
+                <p>
+                    The code implemented in this project made use of the following interfaces to collect user info:
+                <ul>
+                    <li>The <a href="https://www.w3schools.com/js/js_window.asp" target="_blank">Window interface</a>
+                        (part of JavaScript by default; allows JS to communicate with the browser).</li>
+                    <li>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator"
+                            target="_blank">Navigator
+                            interface</a>, that inherits the Window interface. </li>
+                    <li>An external API: <a href="http://ip-api.com" target="_blank">IP Geolocation API</a>. This
+                        accessed the user location and currency data.</li>
+                </ul>
+                </p>
+            </div>
         </div>
 
-        <div class=" row">
+        <div class="row mt-3">
             <!-- authors + class info -->
-            <h2>Who made Fly on the Wall?</h2>
-            <p>This project was made by Jeremy Kemp '25 and Yumna Ahmed '25 from Davidson College, under the guidance of
-                Prof. Owen Mundy.
-                It was made as part of the DIG-245 Critical Web Design class offered Fall 2023.</p>
-
+            <div class="col-12 col-md-12 col-lg-12">
+                <h2>Who made Fly on the Wall?</h2>
+                <p>This project was made by Jeremy Kemp '25 and Yumna Ahmed '25 from Davidson College, under the
+                    guidance of
+                    Prof. Owen Mundy.
+                    It was made as part of the DIG-245 Critical Web Design class offered Fall 2023.
+                </p>
+            </div>
         </div>
     </div>
 

@@ -3,20 +3,21 @@
   display: none;
 }
 
-#background{
-    background-color: #FFF8F0;
+.background {
+  background-color: #fff8f0;
 }
-#logo{
-    margin-top: 2rem;
+
+#logo {
+  margin-top: 2rem;
 }
 
 /* Intro styling: */
-#storyline{
+#storyline {
   margin-top: 15rem;
   font-size: x-large;
 }
 
-.formLink{
+.formLink {
   display: none;
   margin-top: 5rem;
 }
@@ -34,7 +35,7 @@
 
 .form-group {
   margin-top: 1rem;
-}   
+}
 
 /* Loading page styling: */
 
@@ -46,73 +47,72 @@
   margin-top: 10rem;
 }
 
-#loadText{
+#loadText {
   margin-top: 12rem;
   text-align: center;
   font-size: larger;
 }
 
 .loader {
+  width: 0;
+  height: 4.8px;
+  /* display: inline-block; */
+  position: relative;
+  background: #000000;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  /* box-sizing: border-box; */
+  animation: animFw 5s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: "";
+  width: 10px;
+  height: 2px;
+  background: #000000;
+  position: absolute;
+  top: 9px;
+  right: -2px;
+  opacity: 0;
+  transform: rotate(-45deg) translateX(0px);
+  /* box-sizing: border-box; */
+  animation: coli1 0.3s linear infinite;
+}
+.loader::before {
+  top: -4px;
+  transform: rotate(45deg);
+  animation: coli2 0.3s linear infinite;
+}
+
+@keyframes animFw {
+  0% {
     width: 0;
-    height: 4.8px;
-    /* display: inline-block; */
-    position: relative;
-    background: #000000;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    /* box-sizing: border-box; */
-    animation: animFw 5s linear infinite;
   }
-    .loader::after,
-    .loader::before {
-      content: '';
-      width: 10px;
-      height: 2px;
-      background: #000000;
-      position: absolute;
-      top: 9px;
-      right: -2px;
-      opacity: 0;
-      transform: rotate(-45deg) translateX(0px);
-      /* box-sizing: border-box; */
-      animation: coli1 0.3s linear infinite;
-    }
-    .loader::before {
-      top: -4px;
-      transform: rotate(45deg);
-      animation: coli2 0.3s linear infinite;
-    }
-  
-  @keyframes animFw {
-      0% {
-    width: 0;
-  }
-      100% {
+  100% {
     width: 100%;
   }
-    }
-  
-  @keyframes coli1 {
-      0% {
+}
+
+@keyframes coli1 {
+  0% {
     transform: rotate(-45deg) translateX(0px);
     opacity: 0.7;
   }
-      100% {
+  100% {
     transform: rotate(-45deg) translateX(-45px);
     opacity: 0;
   }
-    }
-  
-  @keyframes coli2 {
-      0% {
+}
+
+@keyframes coli2 {
+  0% {
     transform: rotate(45deg) translateX(0px);
     opacity: 1;
   }
-      100% {
+  100% {
     transform: rotate(45deg) translateX(-45px);
     opacity: 0.7;
   }
-    }
-    
+}
 
 /* Results/ images styling: */
 .navbar-logo-img {
@@ -127,11 +127,14 @@
 
 }
 
-h3{
+h3 {
   text-align: center;
 }
 
-/* #batteryStat, #locStat, #currStat, #deviceStat,#howBtn, #locImg, #devImg, #currImg, #battImg {
-  display: none; 
-} */
+.where {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 /* About page styling: */

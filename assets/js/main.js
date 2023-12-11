@@ -68,14 +68,9 @@ document.body.addEventListener("click", function (e) {
   // console.log(e.target.classList);
   // then determine the view to display by the target clicked
 
-  //intro page has formLink
-  //form page has loadLink
-  //load page does not need a button
-  //image page has imagesLink, aboutLink, homeLink [not implemented yet]
-
   if (e.target.classList.contains("formLink")) {
     displayView("form");
-} else if (e.target.classList.contains("introLink")) {
+  } else if (e.target.classList.contains("introLink")) {
     displayView("intro");
   } else if (e.target.classList.contains("loadLink")) {
     displayView("load");
@@ -163,9 +158,8 @@ setInterval(function () {
   loadText.innerText = `${textOpts[Math.floor(Math.random() * 6)]}`;
 }, 1000);
 
-
 // Get the fly element
-const fly = document.getElementById('fly');
+const fly = document.getElementById("fly");
 
 // Function to animate the fly
 function animateFly() {
@@ -182,8 +176,6 @@ function animateFly() {
 
 // Call the animateFly function every 2 seconds
 setInterval(animateFly, 2000);
-
-
 
 //                          RESULTS PAGE Content                //
 
@@ -258,10 +250,9 @@ navigator.getBattery().then((battery) => {
   }`;
 });
 
-
 //image display function : upon button click, each new image is revealed
 index = 0;
-function imgDisplay(){
+function imgDisplay() {
   let deviceStat = document.getElementById("deviceStat");
   let locStat = document.getElementById("locStat");
   let currStat = document.getElementById("currStat");
@@ -275,13 +266,12 @@ function imgDisplay(){
 
   //TODO: code this better\
   console.log(index);
-  if(index==0){
+  if (index == 0) {
     index++;
     locImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${city},${region}">`;
-    locStat.style.display="block";
+    locStat.style.display = "block";
     locStat.classList.remove("d-none");
-  }
-  else if(index==1){
+  } else if (index == 1) {
     index++;
     var myString = "This is a string.";
     var strChng = /\w\s(.*)/g;
@@ -290,13 +280,11 @@ function imgDisplay(){
 
     devImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${match[1]}">`;
     deviceStat.classList.remove("d-none");
-  }
-  else if(index==2){
+  } else if (index == 2) {
     index++;
     currImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${currency}">`;
     currStat.classList.remove("d-none");
-  }
-  else if(index==3){
+  } else if (index == 3) {
     //index++;
     //battImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${battCharge}">`;
     batteryStat.classList.remove("d-none");
