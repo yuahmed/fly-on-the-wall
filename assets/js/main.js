@@ -48,16 +48,19 @@ function displayView(view) {
   if (view !== load) {
     bg.classList.remove("bgChange");
     bg.style.backgroundColor = "#fff8f0";
+    updateHSLValue("#fff8f0", view);
   }
 
   if (view === "images") {
     bg.style.backgroundColor = `${color.value}`;
+    updateHSLValue(color.value, view);
   }
 
   // special case: loading page to images
   if (view === "load") {
     bg.classList.add("bgChange");
     bg.style.setProperty("--toColor", `${color.value}`);
+    updateHSLValue(color.value,view);
     // set time out
     setTimeout(function () {
       displayView("images");
@@ -164,7 +167,7 @@ function animateFly() {
   // Apply new position using CSS transform
   fly.style.transform = `translate(${newX}px, ${newY}px)`;
 
-  //TODO: if it moves backwords, the image is flipped
+  //TODO: if it moves backwards, the image is flipped
   // such that the fly is facing the direction it flies in
 }
 
@@ -191,15 +194,14 @@ function getGeoLocation() {
   return fetch(`https://api.ipdata.co?api-key=${apiKey}`)
     .then((res) => res.json())
     .then((data) => {
-      longitude      = data.longitude;
-      latitude       = data.latitude;
+      longitude = data.longitude;
+      latitude = data.latitude;
       continent_name = data.continent_name;
-      country_name   = data.country_name;
-      region         = data.region;
-      city           = data.city;
+      country_name = data.country_name;
+      region = data.region;
+      city = data.city;
     });
 }
-
 
 // Getting currency Info
 function getCurrencyInfo() {
@@ -215,9 +217,9 @@ function getTimeInfo() {
   return fetch(`https://api.ipdata.co/3.3.3.3/time_zone?api-key=${apiKey}`)
     .then((res) => res.json())
     .then((data) => {
-      timezoneAbbr   = data.abbr;
+      timezoneAbbr = data.abbr;
       timezoneOffset = data.offset;
-      current_time   = data.current_time;
+      current_time = data.current_time;
     });
 }
 
@@ -241,71 +243,119 @@ function getDevice() {
 
 //battery  info
 navigator.getBattery().then((battery) => {
-  let chargeStatus       = document.querySelector("#charge");
-  let level              = document.querySelector("#level");
+  let chargeStatus = document.querySelector("#charge");
+  let level = document.querySelector("#level");
 
-  let battCharge         = `${battery.level * 100}%`;
-  level.innerHTML        = battCharge;
+  let battCharge = `${battery.level * 100}%`;
+  level.innerHTML = battCharge;
   chargeStatus.innerHTML = `${
     battery.charging ? " charging." : " not charging."
   }`;
 });
 
 //text display of user data:
-let time            = document.querySelector("#time");
-let longLat         = document.querySelector("#longLat");
-let loc             = document.querySelector("#location");
-let currency        = document.querySelector("#currency");
-let device          = document.querySelector("#device");
-let battery         = document.querySelector("#battery");
+let time = document.querySelector("#time");
+let longLat = document.querySelector("#longLat");
+let loc = document.querySelector("#location");
+let currency = document.querySelector("#currency");
+let device = document.querySelector("#device");
+let battery = document.querySelector("#battery");
 
 devType = getDevice();
 
 // time.innerHTML    =
-// longLat.innerHTML = 
-loc.innerHTML        = `${city}, ${region}, ${country_name}.`;
-currency.innerHTML   = `${currencyPlural}.`;
-device.innerHTML     = devType;
+// longLat.innerHTML =
+loc.innerHTML = `${city}, ${region}, ${country_name}.`;
+currency.innerHTML = `${currencyPlural}.`;
+device.innerHTML = devType;
 //battery content handled in its function above
-
 
 //result display function : upon button click, a new result item is revealed
 index = 0;
 function resDisplay() {
-
   let longLatStat = document.querySelector("#longLatStat");
-  let locStat     = document.querySelector("#locStat");
-  let currStat    = document.querySelector("#currStat");
-  let devStat     = document.querySelector("#devStat");
-  let battStat    = document.querySelector("#battStat");
-  let howBtn      = document.querySelector("#howBtn");
+  let locStat = document.querySelector("#locStat");
+  let currStat = document.querySelector("#currStat");
+  let devStat = document.querySelector("#devStat");
+  let battStat = document.querySelector("#battStat");
+  let howBtn = document.querySelector("#howBtn");
 
-  if(index == 0){
+  if (index == 0) {
     index++;
     longLatStat.style.display = "block";
     longLatStat.classList.remove("d-none");
-  }
-  else if(index == 1){
+  } else if (index == 1) {
     index++;
     locStat.style.display = "block";
     locStat.classList.remove("d-none");
-  }
-  else if(index == 2){
+  } else if (index == 2) {
     index++;
     currStat.style.display = "block";
     currStat.classList.remove("d-none");
-  }
-  else if(index == 3){
+  } else if (index == 3) {
     index++;
     devStat.style.display = "block";
     devStat.classList.remove("d-none");
-  }
-  else if(index == 4){
+  } else if (index == 4) {
     //index++;
     battStat.style.display = "block";
     battStat.classList.remove("d-none");
     howBtn.style.display = "block";
     howBtn.classList.remove("d-none");
   }
+}
 
+//    handling contrast bw bg color + font color:   //
+function updateHSLValue(colChange, view) {
+  const hexColor = colChange.substring(1); // Removing the '#' character
+  const rgbColor = parseInt(hexColor, 16);
+  //getting r, g & b components using bit manipulation
+  const r = (rgbColor >> 16) & 255;
+  const g = (rgbColor >> 8) & 255;
+  const b = rgbColor & 255;
+
+  const hslColor = rgbToHsl(r, g, b);
+
+  const lightness = hslColor[2];
+
+  // Set text color based on lightness
+  if (view === "load") {
+    bg.style.setProperty("--textToCol", lightness > 50 ? "#000000" : "#ffffff");
+  } else {
+    bg.style.color = lightness > 50 ? "#000000" : "#ffffff";
+  }
+}
+
+//converts the rgb color to hsl here, return hsl equivalent
+function rgbToHsl(r, g, b) {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h,
+    s,
+    l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0; // achromatic
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+
+  return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
 }

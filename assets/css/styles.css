@@ -123,10 +123,13 @@
 
 :root {
   --toColor: blue;
+  --textToCol: #000000;
 }
 @keyframes mymove {
-  from {background-color:  #fff8f0;;}
+  from {background-color:  #fff8f0;}
   to {background-color: var(--toColor);}
+  from{color: #000000;}
+  to {color: var(--textToCol);}
 }
 
 /* Results/ images styling: */
