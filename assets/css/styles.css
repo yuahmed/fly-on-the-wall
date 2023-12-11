@@ -114,6 +114,21 @@
   }
 }
 
+.bgChange {
+  width: auto;
+  height: 200px;
+  background:  #fff8f0;
+  animation: mymove 5s infinite;
+}
+
+:root {
+  --toColor: blue;
+}
+@keyframes mymove {
+  from {background-color:  #fff8f0;;}
+  to {background-color: var(--toColor);}
+}
+
 /* Results/ images styling: */
 .navbar-logo-img {
   width: 130px; /* Adjust the width as needed */
