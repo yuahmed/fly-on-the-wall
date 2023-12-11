@@ -179,55 +179,41 @@ setInterval(animateFly, 2000);
 
 //                          RESULTS PAGE Content                //
 
-//Get user data: location, currency
+let apiKey = '0124f293e597ecbb56d530359574ff3b7c5ff74a41966f4ba1d156cc';
 
-// Variables to store user information
-let ipAddress, country, region, city, timezone, currency, organisationName;
+let longitude, latitude, continent_name, country_name, region, city, currencyPlural, timezoneAbbr, timezoneOffset, current_time;
 
-// Getting user's location
-fetch("http://ip-api.com/json/?fields=45674495")
-  .then((response) => {
-    // Check if the request was successful (status code 200)
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    // Parse response.body (convert to JSON), pass to next
-    return response.json();
-  })
-  // data = deserialized response body
-  .then((data) => {
-    // Store values in variables
-    ipAddress = data.query;
-    country = data.country;
-    region = data.regionName;
+// Getting GeoLocation info
+function getGeoLocation() {
+  return fetch(`https://api.ipdata.co?api-key=${apiKey}`).then(res => res.json()).then(data => {
+    longitude = data.longitude;
+    latitude = data.latitude;
+    continent_name = data.continent_name;
+    country_name = data.country_name;
+    region = data.region;
     city = data.city;
-    timezone = data.timezone;
-    currency = data.currency;
-    organisationName = data.org;
-
-    //to remove later:
-    console.log("IP Address:", ipAddress);
-    console.log("Country:", country);
-    console.log("Region:", region);
-    console.log("City:", city);
-    console.log("Timezone:", timezone);
-    console.log("Currency:", currency);
-    console.log("Organisation:", organisationName);
-
-    //text display of user data:
-
-    let loc = document.querySelector("#location");
-    let curr = document.querySelector("#currency");
-
-    loc.innerHTML = `${city}, ${region}, ${country}.`;
-    curr.innerHTML = `${currency}.`;
-
-    region = region.replace(/ /g, ""); //for thr image content later.
-  })
-  .catch((error) => {
-    console.error("Error fetching IP information:", error);
   });
+}
+
+// Getting currency Info
+function getCurrencyInfo() {
+  return fetch(`https://api.ipdata.co/203.100.0.51/currency?api-key=${apiKey}`).then(res => res.json()).then(data => {
+    currencyPlural = data.plural;
+  });
+}
+
+// Getting Time info
+function getTimeInfo() {
+  return fetch(`https://api.ipdata.co/3.3.3.3/time_zone?api-key=${apiKey}`).then(res => res.json()).then(data => {
+    timezoneAbbr = data.abbr;
+    timezoneOffset = data.offset;
+    current_time = data.current_time;
+  });
+}
+
+
+
+
 
 //obtaining user device:
 //currently only set up for WINDOWS, APPLE, LINUX & ANDROID
@@ -250,6 +236,7 @@ function getDevice() {
     return "Unknown";
   }
 }
+
 
 //battery  info
 navigator.getBattery().then((battery) => {
