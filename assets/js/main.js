@@ -1,22 +1,15 @@
-//LOGIC FLOW:
-// summary of what each page should lead to:
-// intro --> form
-// form --> loading
-// loading --> results/ images page (AUTOMATIC/ no button)
-// images -- > about (two cases: about button (navbar) AND "how do you know" button after 4th image)
+//variables to dictate bg color transitions
+let color = document.querySelector("#fcolor");
+let bg = document.getElementById("background");
 
-//TO DOs:
-// 1. implement historyState for functionality to go to the previous page
+//                      HANDLING PAGE TRANSITIONS:                //
 
-window.addEventListener('popstate', function(event) {
+window.addEventListener("popstate", function (event) {
   // Handle the back button click here
   // You might want to check the event state and navigate accordingly
-  displayView(event.state || 'intro');
+  displayView(event.state || "intro");
 });
 
-// 2. organize this JS file
-
-let bg = document.getElementById("background");
 // handling view transitions
 let views = {
   intro: document.querySelector("#intro"),
@@ -42,9 +35,9 @@ function displayView(view) {
 
   // hide all others
   for (var key in views) {
-      if (views.hasOwnProperty(key)) {
-          views[key].style.display = "none";
-      }
+    if (views.hasOwnProperty(key)) {
+      views[key].style.display = "none";
+    }
   }
 
   // show the selected item
@@ -52,16 +45,28 @@ function displayView(view) {
 
   // update the page state to reflect the new view
   history.pushState(view, null, `#${view}`);
+  if (view !== load) {
+    bg.classList.remove("bgChange");
+    bg.style.backgroundColor = "#fff8f0";
+    updateHSLValue("#fff8f0", view);
+  }
+
+  if (view === "images") {
+    bg.style.backgroundColor = `${color.value}`;
+    updateHSLValue(color.value, view);
+  }
 
   // special case: loading page to images
   if (view === "load") {
-      // set time out
-      setTimeout(function () {
-          displayView("images");
-      }, 5000);
+    bg.classList.add("bgChange");
+    bg.style.setProperty("--toColor", `${color.value}`);
+    updateHSLValue(color.value,view);
+    // set time out
+    setTimeout(function () {
+      displayView("images");
+    }, 5000);
   }
 }
-
 
 // add listener to entire page
 document.body.addEventListener("click", function (e) {
@@ -74,7 +79,6 @@ document.body.addEventListener("click", function (e) {
     displayView("intro");
   } else if (e.target.classList.contains("loadLink")) {
     displayView("load");
-    // document.getElementById("background").style.color = color.value;
   } else if (e.target.classList.contains("imagesLink")) {
     displayView("images");
   } else if (e.target.classList.contains("aboutLink")) {
@@ -101,17 +105,12 @@ setTimeout(function () {
   }, 5000);
 }, 5000);
 
-
-
 //                      FORM PAGE Content:                           //
 
-
-//let color = document.querySelector("#fcolor");
 // handling form values + submission
 let form = document.getElementById("myForm");
 let btn = document.querySelector("#submit");
 let nickname = document.querySelector("#name");
-let color = document.querySelector("#fcolor"); //moved up for background
 let whereBtn = document.querySelector("#whereBtn");
 
 color.addEventListener("change", buttonStyle);
@@ -127,10 +126,9 @@ function buttonStyle() {
 
 form.addEventListener("submit", logSubmit);
 
+//setting up the where's [name] button
 function logSubmit(event) {
   event.preventDefault();
-
-  //console.log(nickname);
 
   whereBtn.innerHTML = `<h2 style = "text-align: center;">
         WHERE'S </h2>
@@ -139,7 +137,6 @@ function logSubmit(event) {
 }
 
 //                              LOADING PAGE content:                         //
-//bg.style.backgroundImage = `linear-gradient(#FFF8F0,${color.value}`;
 
 //changing text on loading page:
 let loadText = document.getElementById("loadText");
@@ -170,57 +167,64 @@ function animateFly() {
   // Apply new position using CSS transform
   fly.style.transform = `translate(${newX}px, ${newY}px)`;
 
-  //TODO: if it moves backwords, the image is flipped
+  //TODO: if it moves backwards, the image is flipped
   // such that the fly is facing the direction it flies in
 }
 
 // Call the animateFly function every 2 seconds
 setInterval(animateFly, 2000);
 
-//                          RESULTS PAGE Content                //
+//                          RESULTS PAGE Content + APIs              //
 
-let apiKey = '0124f293e597ecbb56d530359574ff3b7c5ff74a41966f4ba1d156cc';
+let apiKey = "0124f293e597ecbb56d530359574ff3b7c5ff74a41966f4ba1d156cc";
 
-let longitude, latitude, continent_name, country_name, region, city, currencyPlural, timezoneAbbr, timezoneOffset, current_time;
+let longitude,
+  latitude,
+  continent_name,
+  country_name,
+  region,
+  city,
+  currencyPlural,
+  timezoneAbbr,
+  timezoneOffset,
+  current_time;
 
 // Getting GeoLocation info
 function getGeoLocation() {
-  return fetch(`https://api.ipdata.co?api-key=${apiKey}`).then(res => res.json()).then(data => {
-    longitude = data.longitude;
-    latitude = data.latitude;
-    continent_name = data.continent_name;
-    country_name = data.country_name;
-    region = data.region;
-    city = data.city;
-  });
+  return fetch(`https://api.ipdata.co?api-key=${apiKey}`)
+    .then((res) => res.json())
+    .then((data) => {
+      longitude = data.longitude;
+      latitude = data.latitude;
+      continent_name = data.continent_name;
+      country_name = data.country_name;
+      region = data.region;
+      city = data.city;
+    });
 }
 
 // Getting currency Info
 function getCurrencyInfo() {
-  return fetch(`https://api.ipdata.co/203.100.0.51/currency?api-key=${apiKey}`).then(res => res.json()).then(data => {
-    currencyPlural = data.plural;
-  });
+  return fetch(`https://api.ipdata.co/203.100.0.51/currency?api-key=${apiKey}`)
+    .then((res) => res.json())
+    .then((data) => {
+      currencyPlural = data.plural;
+    });
 }
 
 // Getting Time info
 function getTimeInfo() {
-  return fetch(`https://api.ipdata.co/3.3.3.3/time_zone?api-key=${apiKey}`).then(res => res.json()).then(data => {
-    timezoneAbbr = data.abbr;
-    timezoneOffset = data.offset;
-    current_time = data.current_time;
-  });
+  return fetch(`https://api.ipdata.co/3.3.3.3/time_zone?api-key=${apiKey}`)
+    .then((res) => res.json())
+    .then((data) => {
+      timezoneAbbr = data.abbr;
+      timezoneOffset = data.offset;
+      current_time = data.current_time;
+    });
 }
-
-
-
-
 
 //obtaining user device:
 //currently only set up for WINDOWS, APPLE, LINUX & ANDROID
-let device = document.querySelector("#device");
-devType = getDevice();
-device.innerHTML = devType;
-
 function getDevice() {
   const userAgent = window.navigator.userAgent.toLowerCase();
 
@@ -233,10 +237,9 @@ function getDevice() {
   } else if (userAgent.includes("android")) {
     return "an Android";
   } else {
-    return "Unknown";
+    return "an unknown";
   }
 }
-
 
 //battery  info
 navigator.getBattery().then((battery) => {
@@ -250,44 +253,109 @@ navigator.getBattery().then((battery) => {
   }`;
 });
 
-//image display function : upon button click, each new image is revealed
+//text display of user data:
+let time = document.querySelector("#time");
+let longLat = document.querySelector("#longLat");
+let loc = document.querySelector("#location");
+let currency = document.querySelector("#currency");
+let device = document.querySelector("#device");
+let battery = document.querySelector("#battery");
+
+devType = getDevice();
+
+// time.innerHTML    =
+// longLat.innerHTML =
+loc.innerHTML = `${city}, ${region}, ${country_name}.`;
+currency.innerHTML = `${currencyPlural}.`;
+device.innerHTML = devType;
+//battery content handled in its function above
+
+//result display function : upon button click, a new result item is revealed
 index = 0;
-function imgDisplay() {
-  let deviceStat = document.getElementById("deviceStat");
-  let locStat = document.getElementById("locStat");
-  let currStat = document.getElementById("currStat");
-  let batteryStat = document.getElementById("batteryStat");
-  let howBtn = document.getElementById("howBtn");
+function resDisplay() {
+  let longLatStat = document.querySelector("#longLatStat");
+  let locStat = document.querySelector("#locStat");
+  let currStat = document.querySelector("#currStat");
+  let devStat = document.querySelector("#devStat");
+  let battStat = document.querySelector("#battStat");
+  let howBtn = document.querySelector("#howBtn");
 
-  let locImg = document.getElementById("locImg");
-  let devImg = document.getElementById("devImg");
-  let currImg = document.getElementById("currImg");
-  let battImg = document.getElementById("battImg");
-
-  //TODO: code this better\
-  console.log(index);
   if (index == 0) {
     index++;
-    locImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${city},${region}">`;
-    locStat.style.display = "block";
-    locStat.classList.remove("d-none");
+    longLatStat.style.display = "block";
+    longLatStat.classList.remove("d-none");
   } else if (index == 1) {
     index++;
-    var myString = "This is a string.";
-    var strChng = /\w\s(.*)/g;
-    var match = strChng.exec(devType);
-    console.log(match[1]);
-
-    devImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${match[1]}">`;
-    deviceStat.classList.remove("d-none");
+    locStat.style.display = "block";
+    locStat.classList.remove("d-none");
   } else if (index == 2) {
     index++;
-    currImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${currency}">`;
+    currStat.style.display = "block";
     currStat.classList.remove("d-none");
   } else if (index == 3) {
+    index++;
+    devStat.style.display = "block";
+    devStat.classList.remove("d-none");
+  } else if (index == 4) {
     //index++;
-    //battImg.innerHTML = `<img src= "https://loremflickr.com/320/240/${battCharge}">`;
-    batteryStat.classList.remove("d-none");
+    battStat.style.display = "block";
+    battStat.classList.remove("d-none");
+    howBtn.style.display = "block";
     howBtn.classList.remove("d-none");
   }
+}
+
+//    handling contrast bw bg color + font color:   //
+function updateHSLValue(colChange, view) {
+  const hexColor = colChange.substring(1); // Removing the '#' character
+  const rgbColor = parseInt(hexColor, 16);
+  //getting r, g & b components using bit manipulation
+  const r = (rgbColor >> 16) & 255;
+  const g = (rgbColor >> 8) & 255;
+  const b = rgbColor & 255;
+
+  const hslColor = rgbToHsl(r, g, b);
+
+  const lightness = hslColor[2];
+
+  // Set text color based on lightness
+  if (view === "load") {
+    bg.style.setProperty("--textToCol", lightness > 50 ? "#000000" : "#ffffff");
+  } else {
+    bg.style.color = lightness > 50 ? "#000000" : "#ffffff";
+  }
+}
+
+//converts the rgb color to hsl here, return hsl equivalent
+function rgbToHsl(r, g, b) {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h,
+    s,
+    l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0; // achromatic
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+
+  return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
 }

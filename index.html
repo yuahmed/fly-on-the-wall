@@ -130,8 +130,6 @@
         <!-- Images will be dynamically (through JS) added here -->
 
         <div class="row" id="navbar">
-            <!-- navbar with Home - logo - About  -->
-            <!-- navbar with Home - logo - About  -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <!-- <a class="navbar-brand" href="#">Navbar</a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -153,73 +151,88 @@
                         </li>
 
                         <li class="nav-item active" style="margin-left: 30rem;">
-                            <a class="nav-link aboutLink" href="#about">About <span class="sr-only"></span></a>
+                            <a class="nav-link aboutLink" href="#about">About<span class="sr-only"></span></a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
 
-        <!-- top two images here  -->
-        <div class="row mt-3">
-            <!-- top left image -->
-            <div class="col-4 col-md-4 col-lg-4">
-                <div class="d-none" id="locStat">
-                    <h3>You are in <span id="location"></span></h3>
-                    <div id="locImg" class="align-items-center"></div>
-                </div>
-            </div>
-
-            <div class="col-4 col-md-4 col-lg-4"></div>
-
-            <!-- top right image -->
-            <div class="col-4 col-md-4 col-lg-4">
-                <div class="d-none" id="deviceStat">
-                    <h3>You are using <span id="device"></span> device.</h3>
-                    <div id="devImg"></div>
-                </div>
+        <!-- TIME -->
+        <div class="row mt-5">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                <h5>Your current time is <span id="time"></span></h5>
             </div>
         </div>
 
-        <!--wheres user button -->
-        <!-- <div class="row where"> -->
-        <div class="row">
+        <!-- WHERE BUTTON  -->
+        <div class="row mt-3">
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
-                <button class="btn btn-info imagesLink" onclick="imgDisplay()">
+                <button class="btn btn-light imagesLink" onclick="resDisplay()">
                     <div id="whereBtn">
                         <!-- added in JS -->
                     </div>
                 </button>
-                <!-- how do you know button  -->
-                <div class="d-none" id="howBtn">
-                    <a class="aboutLink" href="#about">
-                        <button class="btn btn-dark aboutLink">
+            </div>
+        </div>
 
-                            How do you know this?
-                        </button>
-                    </a>
+        <!-- LONG, LAT + globe icon -->
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                <div class="d-none" id="longLatStat">
+                    <h5>text goes here<span id="longLat"></span></h5>
                 </div>
             </div>
         </div>
 
-        <!-- will have bottom two images -->
-        <div class="row">
-            <!-- bottom left image -->
-            <div class="col-4 col-md-4 col-lg-4">
-                <div class="d-none" id="currStat">
-                    <h3>The currency you are using is <span id="currency"></span></h3>
-                    <div id="currImg"></div>
+        <!-- city, region, country + flag icon -->
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                <div class="d-none" id="locStat">
+                    <h5>You are in <span id="location"></span></h5>
                 </div>
             </div>
+        </div>
 
-            <div class="col-4 col-md-4 col-lg-4"></div>
+        <!-- currency + currency icon -->
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                <div class="d-none" id="currStat">
+                    <h5>The currency you use is <span id="currency"></span></h5>
+                </div>
+            </div>
+        </div>
 
-            <!-- bottom right image -->
-            <div class="col-4 col-md-4 col-lg-4">
-                <div class="d-none" id="batteryStat">
-                    <h3>Currently, your device is <span id="charge"></span> The battery level is <span
-                            id="level"></span>.</h3>
-                    <div id="battImg"></div>
+        <!-- DEVICE + device company logo -->
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                <div class="d-none" id="devStat">
+                    <h5>You are using <span id="device"></span> device.</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- BATTERY + battery icon -->
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                <div class="d-none" id="battStat">
+                    <h5>
+                        Currently, your device is <span id="charge"></span> The battery level is <span
+                            id="level"></span>.
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- how do you know button  -->
+        <div class="row mt-5">
+            <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                <div class="d-none" id="howBtn">
+                    <a class="aboutLink" href="#about">
+                        <button class="btn btn-info">
+                            How do you know this?
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
