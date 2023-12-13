@@ -4,11 +4,6 @@ let bg = document.getElementById("background");
 
 //                      HANDLING PAGE TRANSITIONS:                //
 
-window.addEventListener("popstate", function (event) {
-  // Handle the back button click here
-  // You might want to check the event state and navigate accordingly
-  displayView(event.state || "intro");
-});
 
 // handling view transitions
 let views = {
@@ -92,18 +87,49 @@ document.body.addEventListener("click", function (e) {
 let story = document.getElementById("storyline");
 let contBtn = document.querySelector(".formLink");
 
-//timeout to change the text after 5 seconds
-setTimeout(function () {
-  story.innerText =
-    "Now that you're here, the Fly is wondering whether your data is in this mess! To find out, it needs your help.";
+// //timeout to change the text after 5 seconds
+// setTimeout(function () {
+//   story.innerText =
+//     "Because flies have been around for so long, many have thought thay have all-knowing capabilities.";
 
-  // another timeout to change the text again after an additional 5 seconds
-  setTimeout(function () {
-    story.innerText =
-      "Can you answer some of it's questions? If yes, press continue to help the Fly solve this puzzle!";
+//   // another timeout to change the text again after an additional 5 seconds
+//   setTimeout(function () {
+//     story.innerText =
+//       "For some time now, many researchers all over the globe have been studying ";
+//     contBtn.style.display = "block";
+//   }, 5000);
+// }, 5000);
+
+var i = 0;
+var txt = 'Flies have been around for roughly 250 million years, far more than us humans. Because they have been around for so long, theories have suggested that they have all-knowing capabilities. After years of research, the first model of a fly is in testing and is ready to be used. By answering a few basic questions, the fly is capable of knowing much more about you than you think!';
+var speed = 40; /* The speed/duration of typing in milliseconds */
+var pauseDuration = 1000; /* The duration of pause in milliseconds */
+
+function typeWriter() {
+  var storylineElement = document.getElementById("storyline");
+
+  if (i < txt.length) {
+    storylineElement.innerHTML += txt.charAt(i);
+    if (txt.charAt(i) === '.' || txt.charAt(i) === '!') {
+      storylineElement.innerHTML += '<br><br>';
+      i++;
+      setTimeout(typeWriter, pauseDuration); // Pause after each sentence
+    } else {
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  } else {
+    // Display the continue button after the typing is complete
     contBtn.style.display = "block";
-  }, 5000);
-}, 5000);
+  }
+}
+
+// Trigger the typeWriter function when the window has finished loading
+window.onload = function() {
+  typeWriter();
+};
+
+
 
 //                      FORM PAGE Content:                           //
 
@@ -131,9 +157,7 @@ function logSubmit(event) {
   event.preventDefault();
 
   whereBtn.innerHTML = `<h2 style = "text-align: center;">
-        WHERE'S </h2>
-    <h2 style = "text-align: center;">
-        <strong> ${nickname.value}? </strong> </h2>`;
+        Where's <strong> ${nickname.value}? </strong></h2>`;
 }
 
 //                              LOADING PAGE content:                         //
@@ -176,6 +200,42 @@ setInterval(animateFly, 2000);
 
 //                          RESULTS PAGE Content + APIs              //
 
+
+// Time info
+function showTime(){
+  var date = new Date();
+  var h = date.getHours(); // 0 - 23
+  var m = date.getMinutes(); // 0 - 59
+  var s = date.getSeconds(); // 0 - 59
+  var session = "AM";
+  
+  if(h == 0){
+      h = 12;
+  }
+  
+  if(h > 12){
+      h = h - 12;
+      session = "PM";
+  }
+  
+  h = (h < 10) ? "0" + h : h;
+  m = (m < 10) ? "0" + m : m;
+  s = (s < 10) ? "0" + s : s;
+  
+  var time = h + ":" + m + ":" + s + " " + session;
+  document.getElementById("MyClockDisplay").innerText = time;
+  document.getElementById("MyClockDisplay").textContent = time;
+  
+  setTimeout(showTime, 1000);
+  
+}
+
+showTime();
+
+
+
+//API Info
+
 let apiKey = "0124f293e597ecbb56d530359574ff3b7c5ff74a41966f4ba1d156cc";
 
 let longitude,
@@ -184,10 +244,8 @@ let longitude,
   country_name,
   region,
   city,
-  currencyPlural,
-  timezoneAbbr,
-  timezoneOffset,
-  current_time;
+  emojiFlag,
+  currencyPlural;
 
 // Getting GeoLocation info
 function getGeoLocation() {
@@ -200,26 +258,17 @@ function getGeoLocation() {
       country_name = data.country_name;
       region = data.region;
       city = data.city;
+      emojiFlag = data.emoji_flag;
     });
 }
 
 // Getting currency Info
 function getCurrencyInfo() {
-  return fetch(`https://api.ipdata.co/203.100.0.51/currency?api-key=${apiKey}`)
+  return fetch(`https://api.ipdata.co/currency?api-key=${apiKey}`)
     .then((res) => res.json())
     .then((data) => {
       currencyPlural = data.plural;
-    });
-}
-
-// Getting Time info
-function getTimeInfo() {
-  return fetch(`https://api.ipdata.co/3.3.3.3/time_zone?api-key=${apiKey}`)
-    .then((res) => res.json())
-    .then((data) => {
-      timezoneAbbr = data.abbr;
-      timezoneOffset = data.offset;
-      current_time = data.current_time;
+      console.log(currencyPlural);
     });
 }
 
@@ -247,14 +296,13 @@ navigator.getBattery().then((battery) => {
   let level = document.querySelector("#level");
 
   let battCharge = `${battery.level * 100}%`;
-  level.innerHTML = battCharge;
+  level.innerHTML = battCharge + '🔋';
   chargeStatus.innerHTML = `${
     battery.charging ? " charging." : " not charging."
   }`;
 });
 
 //text display of user data:
-let time = document.querySelector("#time");
 let longLat = document.querySelector("#longLat");
 let loc = document.querySelector("#location");
 let currency = document.querySelector("#currency");
@@ -263,11 +311,18 @@ let battery = document.querySelector("#battery");
 
 devType = getDevice();
 
-// time.innerHTML    =
-// longLat.innerHTML =
-loc.innerHTML = `${city}, ${region}, ${country_name}.`;
-currency.innerHTML = `${currencyPlural}.`;
+async function initializeData() {
+  await getGeoLocation();
+  await getCurrencyInfo();
+}
+
+//Wait for functions to finish before loading
+initializeData().then(() => {
+longLat.innerHTML = `${longitude}, ${latitude}. 🗺️`;
+loc.innerHTML = `${city}, ${region}, ${country_name}. ${emojiFlag}`;
+currency.innerHTML = `${currencyPlural}. 💸`;
 device.innerHTML = devType;
+});
 //battery content handled in its function above
 
 //result display function : upon button click, a new result item is revealed

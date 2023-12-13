@@ -29,13 +29,12 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-1">
             <div class="col-2 col-md-2 col-lg-3"></div>
             <div class="col-8 col-md-8 col-lg-6 d-flex flex-column align-items-center text-center">
-                <p id="storyline" class="mb-4">The Fly is exploring the deep dark internet.
-                    It has found a digital labyrinth containing all sorts of data.</p>
+                <p id="storyline" class="mt-1" onload="typeWriter()"></p>
 
-                <button class="btn btn-info formLink">Continue</button>
+                <button class="btn btn-info mt-1 formLink">Continue</button>
             </div>
             <div class="col-2 col-md-2 col-lg-3"></div>
         </div>
@@ -131,37 +130,39 @@
 
         <div class="row" id="navbar">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <!-- <a class="navbar-brand" href="#">Navbar</a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+        
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active" style="margin-left: 7rem;">
+                    <ul class="navbar-nav" style="width: 100%;">
+                        <li class="nav-item active text-center" style="width: 20%; margin: 0 auto;">
                             <a class="nav-link introLink" href="#intro">Home <span class="sr-only"></span></a>
                         </li>
-
-                        <!-- Add a new list item for the logo with a class "navbar-logo" -->
-                        <li class="nav-item navbar-logo" style="margin-left: 30rem;">
-                            <!-- Add your image source here -->
+        
+                        <li class="nav-item text-center" style="width: 60%;">
                             <img src="assets\img\identitynavbar.png" alt="Logo" class="navbar-logo-img">
                         </li>
-
-                        <li class="nav-item active" style="margin-left: 30rem;">
+        
+                        <li class="nav-item active text-center" style="width: 20%;">
                             <a class="nav-link aboutLink" href="#about">About<span class="sr-only"></span></a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
+        
+        
+        
+        
 
         <!-- TIME -->
         <div class="row mt-5">
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
                 <h5>Your current time is <span id="time"></span></h5>
+                <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
             </div>
         </div>
 
@@ -180,10 +181,11 @@
         <div class="row mt-4">
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
                 <div class="d-none" id="longLatStat">
-                    <h5>text goes here<span id="longLat"></span></h5>
+                    <h5>Your Longitude and Latitude are: <span id="longLat"></span></h5>
                 </div>
             </div>
         </div>
+
 
         <!-- city, region, country + flag icon -->
         <div class="row mt-4">
@@ -207,7 +209,7 @@
         <div class="row mt-4">
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
                 <div class="d-none" id="devStat">
-                    <h5>You are using <span id="device"></span> device.</h5>
+                    <h5>You are using <span id="device"></span> device. 💾</h5>
                 </div>
             </div>
         </div>
@@ -229,7 +231,7 @@
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
                 <div class="d-none" id="howBtn">
                     <a class="aboutLink" href="#about">
-                        <button class="btn btn-info">
+                        <button class="btn btn-info aboutLink">
                             How do you know this?
                         </button>
                     </a>
@@ -244,6 +246,33 @@
         <!-- About content goes here -->
 
         <!-- should have homeLink (leads to intro view) -->
+        <div class="row" id="navbar">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav" style="width: 100%;">
+                        <li class="nav-item active text-center" style="width: 20%; margin: 0 auto;">
+                            <a class="nav-link introLink" href="#intro">Home <span class="sr-only"></span></a>
+                        </li>
+        
+                        <li class="nav-item text-center" style="width: 60%;">
+                            <img src="assets\img\identitynavbar.png" alt="Logo" class="navbar-logo-img">
+                        </li>
+        
+                        <li class="nav-item active text-center" style="width: 20%;">
+                            <a class="nav-link aboutLink" href="#about">About<span class="sr-only"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
 
         <!-- what is FOTW -->
         <div class="row mt-3">
@@ -315,7 +344,7 @@
                     <li>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator"
                             target="_blank">Navigator
                             interface</a>, that inherits the Window interface. </li>
-                    <li>An external API: <a href="http://ip-api.com" target="_blank">IP Geolocation API</a>. This
+                    <li>An external API: <a href="https://ipdata.co" target="_blank">IP Geolocation API</a>. This
                         accessed the user location and currency data.</li>
                 </ul>
                 </p>
