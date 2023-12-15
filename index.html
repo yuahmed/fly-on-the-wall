@@ -34,7 +34,7 @@
             <div class="col-8 col-md-8 col-lg-6 d-flex flex-column align-items-center text-center">
                 <p id="storyline" class="mt-1" onload="typeWriter()"></p>
 
-                <button class="btn btn-info mt-1 formLink">Continue</button>
+                <button class="btn btn-dark mt-1 formLink">Continue</button>
             </div>
             <div class="col-2 col-md-2 col-lg-3"></div>
         </div>
@@ -154,10 +154,6 @@
             </nav>
         </div>
         
-        
-        
-        
-
         <!-- TIME -->
         <div class="row mt-5">
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
@@ -169,7 +165,7 @@
         <!-- WHERE BUTTON  -->
         <div class="row mt-3">
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
-                <button class="btn btn-light imagesLink" onclick="resDisplay()">
+                <button class="btn btn-dark imagesLink" id="wb" onclick="resDisplay()">
                     <div id="whereBtn">
                         <!-- added in JS -->
                     </div>
@@ -220,7 +216,7 @@
                 <div class="d-none" id="battStat">
                     <h5>
                         Currently, your device is <span id="charge"></span> The battery level is <span
-                            id="level"></span>.
+                            id="level"></span>
                     </h5>
                 </div>
             </div>
@@ -231,7 +227,7 @@
             <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
                 <div class="d-none" id="howBtn">
                     <a class="aboutLink" href="#about">
-                        <button class="btn btn-info aboutLink">
+                        <button class="btn btn-dark aboutLink" id="hb">
                             How do you know this?
                         </button>
                     </a>
