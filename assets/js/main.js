@@ -1,6 +1,8 @@
 //variables to dictate bg color transitions
 let color = document.querySelector("#fcolor");
 let bg = document.getElementById("background");
+let hb = document.getElementById("hb");
+let wb = document.getElementById("wb");
 
 //                      HANDLING PAGE TRANSITIONS:                //
 
@@ -43,29 +45,29 @@ function displayView(view) {
   if (view !== load) {
     bg.classList.remove("bgChange");
     bg.style.backgroundColor = "#fff8f0";
-    updateHSLValue("#fff8f0", view);
+    updateHSLValue("#fff8f0", view, "none");
   }
 
   if (view === "images") {
     bg.style.backgroundColor = `${color.value}`;
-    updateHSLValue(color.value, view);
+    updateHSLValue(color.value, view, "hb wb");
   }
 
   // special case: loading page to images
   if (view === "load") {
     bg.classList.add("bgChange");
     bg.style.setProperty("--toColor", `${color.value}`);
-    updateHSLValue(color.value,view);
+    updateHSLValue(color.value,view,"none");
     // set time out
     setTimeout(function () {
       displayView("images");
+      animateFly();
     }, 5000);
   }
 }
 
 // add listener to entire page
 document.body.addEventListener("click", function (e) {
-  // console.log(e.target.classList);
   // then determine the view to display by the target clicked
 
   if (e.target.classList.contains("formLink")) {
@@ -86,19 +88,6 @@ document.body.addEventListener("click", function (e) {
 //changing text on intro page:
 let story = document.getElementById("storyline");
 let contBtn = document.querySelector(".formLink");
-
-// //timeout to change the text after 5 seconds
-// setTimeout(function () {
-//   story.innerText =
-//     "Because flies have been around for so long, many have thought thay have all-knowing capabilities.";
-
-//   // another timeout to change the text again after an additional 5 seconds
-//   setTimeout(function () {
-//     story.innerText =
-//       "For some time now, many researchers all over the globe have been studying ";
-//     contBtn.style.display = "block";
-//   }, 5000);
-// }, 5000);
 
 var i = 0;
 var txt = 'Flies have been around for roughly 250 million years, far more than us humans. Because they have been around for so long, theories have suggested that they have all-knowing capabilities. After years of research, the first model of a fly is in testing and is ready to be used. By answering a few basic questions, the fly is capable of knowing much more about you than you think!';
@@ -182,18 +171,29 @@ setInterval(function () {
 // Get the fly element
 const fly = document.getElementById("fly");
 
+// Store the previous position of the fly
+let prevX = 0;
+let prevY = 0;
+
 // Function to animate the fly
 function animateFly() {
   // Generate random coordinates for new position
-  const newX = Math.random() * 200;
-  const newY = Math.random() * 100;
+  const newX = Math.random() * 550;
+  const newY = Math.random() * 100;  
 
   // Apply new position using CSS transform
   fly.style.transform = `translate(${newX}px, ${newY}px)`;
 
-  //TODO: if it moves backwards, the image is flipped
-  // such that the fly is facing the direction it flies in
+  // Flip the image horizontally if moving backward
+  if (newX < prevX) {
+    fly.style.transform += ' scaleX(-1)';
+  }
+
+  // Update previous position
+  prevX = newX;
+  prevY = newY;
 }
+
 
 // Call the animateFly function every 2 seconds
 setInterval(animateFly, 2000);
@@ -294,8 +294,7 @@ function getDevice() {
 navigator.getBattery().then((battery) => {
   let chargeStatus = document.querySelector("#charge");
   let level = document.querySelector("#level");
-
-  let battCharge = `${battery.level * 100}%`;
+  let battCharge = `${Math.floor(battery.level * 100)}%.`;
   level.innerHTML = battCharge + '🔋';
   chargeStatus.innerHTML = `${
     battery.charging ? " charging." : " not charging."
@@ -319,7 +318,12 @@ async function initializeData() {
 //Wait for functions to finish before loading
 initializeData().then(() => {
 longLat.innerHTML = `${longitude}, ${latitude}. 🗺️`;
-loc.innerHTML = `${city}, ${region}, ${country_name}. ${emojiFlag}`;
+if(devType !== "an Apple"){
+  loc.innerHTML = `${city}, ${region}, ${country_name}. 📍`;
+}
+else{
+  loc.innerHTML = `${city}, ${region}, ${country_name}. ${emojiFlag}`;
+}
 currency.innerHTML = `${currencyPlural}. 💸`;
 device.innerHTML = devType;
 });
@@ -361,7 +365,7 @@ function resDisplay() {
 }
 
 //    handling contrast bw bg color + font color:   //
-function updateHSLValue(colChange, view) {
+function updateHSLValue(colChange, view, btn) {
   const hexColor = colChange.substring(1); // Removing the '#' character
   const rgbColor = parseInt(hexColor, 16);
   //getting r, g & b components using bit manipulation
@@ -378,6 +382,15 @@ function updateHSLValue(colChange, view) {
     bg.style.setProperty("--textToCol", lightness > 50 ? "#000000" : "#ffffff");
   } else {
     bg.style.color = lightness > 50 ? "#000000" : "#ffffff";
+  }
+
+  if(btn == "hb wb"){
+    if(lightness < 50){
+      hb.classList.remove("btn-dark");
+      hb.classList.add("btn-light");
+      wb.classList.remove("btn-dark");
+      wb.classList.add("btn-light");
+    }
   }
 }
 
